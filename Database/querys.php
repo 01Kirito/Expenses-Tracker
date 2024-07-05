@@ -30,7 +30,7 @@ $messageUser = "Users table created";
 // create category table 
 $sqlCategories = "CREATE TABLE categories (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL unique ,
     description VARCHAR(255)
 )";
 $messageCategories = "Categories table created";

@@ -1,13 +1,13 @@
 <?php
 // returns the querys we need from the 'Querys.php' file so we can run them by foreach loop easily
-$querys = require_once 'Querys.php';
+$querys = require_once 'querys.php';
 require_once 'Parameter.php';
 
 // using try catch for the exceptions
 try {
     // Connect to MySQL database
-    $dsn = "mysql:host=$host;port=$port;charset=utf8mb4";
-    $pdo = new PDO($dsn, $username, $password);
+    $dsn = "mysql:host=".DB_HOST.";port=".DB_PORT.";charset=".DB_CHAR;
+    $pdo = new PDO($dsn, DB_USER, DB_PASS);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connected to the server successfully<br>";
 
