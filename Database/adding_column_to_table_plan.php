@@ -1,0 +1,3 @@
+<?php
+
+$sql = "SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'plans'";
