@@ -1,6 +1,7 @@
 {
     "require": {
-        "psr/simple-cache": "^3.0"
+        "psr/simple-cache": "^3.0",
+      "ext-curl": "*"
     },
     "autoload": {
         "psr-4": {

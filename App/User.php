@@ -1,9 +1,13 @@
 <?php
 namespace App;
+use App\Http\RequestHandler;
+
 class User {
 
     public function store($Data = null){
-       return json_encode(["message","hello this is from store function"]);
+       $requestHandler = App::getInstance(RequestHandler::class);
+       $response = ["message","hello this is from store function"];
+       $requestHandler->sendResponse(200,["Connection"=>"close"],$response);
     }
 
 
