@@ -1,4 +1,5 @@
 <?php
+
 // returns the querys we need from the 'Querys.php' file so we can run them by foreach loop easily
 $querys = require_once 'querys.php';
 require_once 'Parameter.php';

@@ -7,7 +7,7 @@ $sqlGetColumns = "SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE
 $sqlGetCategories = "SELECT name FROM categories";
 
 try {// make connection by this file
-    require_once 'connection.php';
+    $pdo = require_once 'connection.php';
 
     $pdo->beginTransaction();
     $stmt = $pdo->prepare($sqlGetColumns);
