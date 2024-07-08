@@ -1,16 +1,27 @@
 <?php
 namespace App;
+use App\App ;
 
 class Model {
-    protected const TABLE = null;
+    protected $table ;
     protected $pdo ;
-    function __construct($Database) {
-        $this->pdo = $Database->getConnection() ;
+
+
+    public function __construct() {
+        $this->pdo = App::getInstance(Database::class)->getConnection() ;
     }
 
-    function create(array $data) {
-        $columns = implode(',',array_keys($data));
-        $sql = "INSERT INTO ".self::TABLE." (".$data.")";
+    public function create(array $data=null) {
+          $query = $this->arrayToQuery($data);
+          $sql = "INSERT INTO ".$this->table." (".$query[0].")"." VALUES (".$query[1].");";
+          $stmt = $this->pdo->prepare($sql);
+          if ($stmt->execute($query[2])) {
+              return true ;
+          }else{
+              echo "Error: " . $sql . "<br>" . $pdo->errorInfo();
+              return false ;
+          }
+
     }
 
     function read(){
@@ -38,5 +49,16 @@ class Model {
     }
 
 
+
+    function arrayToQuery($data){
+        $keys = array_keys($data);
+        $values = array_values($data);
+        $params = array_map(function (){ return "?";},array_keys($data));
+        $keys = implode(",",$keys);
+        $params = implode(",",$params);
+
+
+        return [$keys,$params,$values];
+    }
 
 }

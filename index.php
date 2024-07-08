@@ -13,7 +13,7 @@ $url = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 try {
     if (key_exists($url,$routes)){
-        $router = App::getContainer()->get(Router::class);
+        $router = App::getInstance(Router::class);
         $routeParameter = $routes[$url];
         $router->route($routeParameter[0],$routeParameter[1]);
     }else{

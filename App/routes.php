@@ -1,6 +1,7 @@
 <?php
 
 use App\Auth;
+use App\Model;
 use App\User;
 
 
@@ -18,6 +19,7 @@ $routes = [
     ,"/ExpensesTracker/invoice/show"=>[]
     ,"/ExpensesTracker/invoice/update"=>[]
     ,"/ExpensesTracker/invoice/delete"=>[]
+    ,"/ExpensesTracker/model"=>[Model::class,'create']
 
 
 

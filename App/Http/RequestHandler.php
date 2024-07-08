@@ -3,7 +3,7 @@
 namespace App\Http;
 
 class RequestHandler {
-   static protected $commonResponceHeaders = [
+   static protected array $commonResponseHeaders = [
         'Content-Type' => 'application/json',
         'Accept' => 'application/json',
         'Cache-Control' => 'no-cache',
@@ -13,7 +13,7 @@ class RequestHandler {
         'Date' => '',
     ];
 
-    static protected $commonRequestHeaders = [
+    static protected array $commonRequestHeaders = [
         'Content-Type' => 'application/json',
         'Accept' => 'application/json',
         'Cache-Control' => 'no-cache',
@@ -27,18 +27,32 @@ class RequestHandler {
         'Host' => 'localhost',
         'Date' => '',
     ];
-    function sendResponse( int $httpCode,?array $headers,$data){
-       http_response_code($httpCode);
-       $responseHeaders = self::$commonResponceHeaders;
-       if ($headers ==! null){
-       foreach ($headers as $key => $value) {
-           $responseHeaders[$key] = $value;
-       }}
 
-       foreach($responseHeaders as $key => $value){
-           header($key.':'.$value);
-       }
+
+    public function sendResponse( int $httpCode ,?array $customHeaders,$data): void{
+       http_response_code($httpCode);
+       $headers = $customHeaders === null ? self::$commonResponseHeaders : self::setCustomHeader($customHeaders);
+       $this->setHeader($headers);
        echo json_encode($data);
     }
+
+
+    protected function setHeader(array $headers): void
+    {
+        foreach($headers as $key => $value){
+            header($key.':'.$value);
+        }
+    }
+
+    protected function setCustomHeader(array $headers): array
+    {
+
+        $customHeader = self::$commonResponseHeaders;
+        foreach($headers as $key => $value){
+            $customHeader[$key] = $value;
+        }
+        return $customHeader;
+    }
+
 
 }
