@@ -4,26 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3507deca-f3c6-4678-90c0-93858e381227" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/App/Controller/ControllerInvoice.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Controller/ControllerUser.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Migration/seed_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/InvoiceController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/UserController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Http/RequestHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Http/RequestHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Migration/feeding_category.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/feeding_category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Migration/querys.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/querys.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Model/Budget.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Budget.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Model/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Model/Invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Invoice.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Model/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Model/Plan.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Plan.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Model/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Router.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/loadContainer.php" beforeDir="false" afterPath="$PROJECT_DIR$/loadContainer.php" afterDir="false" />
-    </list>
+    <list default="true" id="3507deca-f3c6-4678-90c0-93858e381227" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,7 +37,7 @@
   "keyToString": {
     "PHP Script.Schema_design.php.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feature__request__handler",
+    "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/laragon/www/Basics/Expenses Tracker",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
