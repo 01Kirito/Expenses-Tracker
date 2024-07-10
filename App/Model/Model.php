@@ -22,11 +22,11 @@ class Model {
             try {
             $result =$stmt->execute($query["Values"]);
             if ($result) {
-                $this->response(201,["message" =>$this->getClassName()." created"]);
+                $this->response(201,["message" =>$this->table." created"]);
             }else{
-                $this->response(500,["message"=>$this->getClassName()." creating failed."]);
+                $this->response(500,["message"=>$this->table." creating failed."]);
             }}catch (\PDOException $e) {
-                $this->response(500,["message"=>$this->getClassName()." creating failed.","error"=>$e->getMessage()]);
+                $this->response(500,["message"=>$this->table." creating failed.","error"=>$e->getMessage()]);
             }
     }
 
@@ -40,7 +40,7 @@ class Model {
         if ($result) {
             $this->response(200, $result);
         }else{
-            $this->response(500,["message"=>"No row found in table  ".$this->getClassName()]);
+            $this->response(500,["message"=>"No row found in table  ".$this->table]);
         }
     }
 
@@ -60,9 +60,9 @@ class Model {
         $stmt->execute($query["allParameters"]);
         $rowChanged=$stmt->rowCount();
         if ($rowChanged > 0) {
-            $this->response(200,["message"=>$rowChanged." Row updated in table ".$this->getClassName()." successfully."]);
+            $this->response(200,["message"=>$rowChanged." Row updated in table ".$this->table." successfully."]);
         } else {
-            $this->response(500,["message"=>"Update the row in table ".$this->getClassName()." failed."]);
+            $this->response(500,["message"=>"Update the row in table ".$this->table." failed."]);
         }
     }
 
@@ -73,9 +73,9 @@ class Model {
         $stmt->execute($query["Values"]) ;
         $rowDeleted = $stmt->rowCount();
         if ($rowDeleted > 0) {
-            $this->response(200,["message"=>$rowDeleted." Row deleted in table ".$this->getClassName()." successfully."]);
+            $this->response(200,["message"=>$rowDeleted." Row deleted in table ".$this->table." successfully."]);
         } else {
-            $this->response(500,["message"=>"Deleting the row in table ".$this->getClassName()." failed."]);
+            $this->response(500,["message"=>"Deleting the row in table ".$this->table." failed."]);
         }
     }
 
@@ -86,9 +86,9 @@ class Model {
         $stmt->execute($query["Values"]);
         $rowDeleted = $stmt->rowCount();
         if ($rowDeleted > 0) {
-            $this->response(200,["message"=>$rowDeleted." Row deleted in table ".$this->getClassName()." successfully."]);
+            $this->response(200,["message"=>$rowDeleted." Row deleted in table ".$this->table." successfully."]);
         } else {
-            $this->response(500,["message"=>"Deleting the row in table ".$this->getClassName()." failed."]);
+            $this->response(500,["message"=>"Deleting the row in table ".$this->table." failed."]);
         }
     }
 
@@ -106,9 +106,23 @@ class Model {
         if ($result) {
             $this->response(200, $result);
         }else{
-            $this->response(500,["message"=>"The row in table ".$this->getClassName()." did not found."]);
+            $this->response(500,["message"=>"The row in table ".$this->table." did not found."]);
         }
     }
+
+
+    public function addColumn($columnName,$columnType):void{
+        $sql    = "ALTER TABLE ".$this->table." ADD COLUMN ".$columnName." ".$columnType.";";
+        $stmt   = static::$pdo->prepare($sql);
+        try {
+        $result = $stmt->execute();
+        if ($result) {
+            $this->response(200, ["message"=>"Column created in table ".$this->table." successfully."]);
+        }}catch (\PDOException $e) {
+            $this->response(500,["message"=>$this->table." creating failed.","error"=>$e->getMessage()]);
+        }
+    }
+
 
     function arrayToCondition(array $conditions):array{
         $keys = array_keys($conditions);

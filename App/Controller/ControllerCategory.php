@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\App;
 use App\Model\Category;
 use App\Model\Invoice;
+use App\Model\Plan;
 
 class ControllerCategory
 {
@@ -22,8 +23,8 @@ class ControllerCategory
     }
 
     public function store(array $Data):void{
-        $pairs = $Data['body_json'];
-        static::$Category->create($pairs) ;
+        static::$Category->create($Data['body_json']) ;
+        App::getInstance(Plan::class)->addColumn($Data['body_json']['name'],"DECIMAL(10,2) NOT NULL default 0.00");
     }
 
     public function show(array $Data):void{
