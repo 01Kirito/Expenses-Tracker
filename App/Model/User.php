@@ -1,17 +1,16 @@
 <?php
-namespace App;
+namespace App\Model;
+use App\App;
 use App\Http\RequestHandler;
-use App\App ;
 
 class User extends Model{
 
     protected $table = 'users';
 
     public function store($Data = null){
-       $json = file_get_contents('php://input');
-       $array = json_decode($json,true);
+
        $requestHandler = App::getInstance(RequestHandler::class);
-       if($this->create($array)){
+       if($this->create($Data)){
            $message = ["message" => "User created"];
            $requestHandler->sendResponse(200,["Connection"=>"close","Cache-Control"=>"Cache"],$message);
        }else{

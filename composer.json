@@ -1,7 +1,8 @@
 {
     "require": {
         "psr/simple-cache": "^3.0",
-      "ext-curl": "*"
+      "ext-curl": "*",
+      "ext-pdo": "*"
     },
     "autoload": {
         "psr-4": {

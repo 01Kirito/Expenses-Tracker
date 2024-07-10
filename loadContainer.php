@@ -1,11 +1,13 @@
 <?php
+
 use App\App;
-use App\Model;
-use App\User;
 use App\Container;
+use App\Controller\UserController;
 use App\Database;
-use App\Router;
 use App\Http\RequestHandler;
+use App\Model\Model;
+use App\Model\User;
+use App\Router;
 
 
 $container = new Container();
@@ -16,4 +18,5 @@ $container->set('Pdo',$container->get(Database::class)->getConnection());
 $container->set(Router::class,new Router);
 $container->set(RequestHandler::class,new RequestHandler);
 $container->set(Model::class,new Model);
+$container->set(UserController::class,new UserController);
 

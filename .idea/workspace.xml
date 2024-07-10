@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3507deca-f3c6-4678-90c0-93858e381227" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Expenses Tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Expenses Tracker.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Http/RequestHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Http/RequestHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Router.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/loadContainer.php" beforeDir="false" afterPath="$PROJECT_DIR$/loadContainer.php" afterDir="false" />
     </list>
@@ -27,7 +32,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+    </include_path>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -36,19 +46,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feature__request__handler",
-    "last_opened_file_path": "C:/laragon/www/Basics/Expenses Tracker",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature__request__handler&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/Basics/Expenses Tracker&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\laragon\www\Basics\Expenses Tracker\src" />
@@ -75,7 +85,9 @@
       <workItem from="1720208296038" duration="10413000" />
       <workItem from="1720301754777" duration="13415000" />
       <workItem from="1720372126330" duration="9821000" />
-      <workItem from="1720386665722" duration="23768000" />
+      <workItem from="1720386665722" duration="25700000" />
+      <workItem from="1720471954909" duration="268000" />
+      <workItem from="1720472238075" duration="27049000" />
     </task>
     <servers />
   </component>
