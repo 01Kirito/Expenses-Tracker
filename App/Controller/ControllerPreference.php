@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\App;
 use App\Model\Invoice;
+use App\Model\Preference;
 
 class ControllerPreference
 {
@@ -11,7 +12,7 @@ class ControllerPreference
 
     public function __construct()
     {
-        static::$Preference = App::getInstance(Invoice::class);
+        static::$Preference = App::getInstance(Preference::class);
     }
 
     public function index(): void

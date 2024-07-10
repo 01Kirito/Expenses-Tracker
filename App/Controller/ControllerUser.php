@@ -27,7 +27,10 @@ class ControllerUser
 
     public function store(array $Data):void{
         static::$User->create($Data['body_json']) ;
-      
+        $lastInsertId = App::getInstance(Database::class)->getConnection()->lastInsertId();
+        App::getInstance(Preference::class)->create(["user_id"=>$lastInsertId,"theme"=>"dark"]);
+        App::getInstance(Plan::class)->create(["user_id"=>$lastInsertId]);
+        App::getInstance(Budget::class)->create(["user_id"=>$lastInsertId]);
     }
 
     public function show(array $Data):void{
