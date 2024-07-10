@@ -2,104 +2,130 @@
 namespace App\Model;
 use App\App;
 use App\Database;
-use mysql_xdevapi\Exception;
+use App\Http\RequestHandler;
+use App\Router;
 
 class Model {
     protected $table ;
-    protected $pdo ;
-
+    protected static $pdo ;
+    protected static $requestHandler ;
 
     public function __construct() {
-        $this->pdo = App::getInstance(Database::class)->getConnection() ;
+        static::$pdo = App::getInstance(Database::class)->getConnection() ;
+        static::$requestHandler = App::getInstance(RequestHandler::class) ;
     }
 
-    public function create(array $data) {
-        try {
+    public function create(array $data):void {
             $query = $this->arrayToInsertQuery($data);
-            $sql = "INSERT INTO " . $this->table . " (" . $query[0] . ")" . " VALUES (" . $query[1] . ");";
-            $stmt = $this->pdo->prepare($sql);
-
-            if ($stmt->execute($query[2])) {
-                return true;
-            } else {
-                return throw new Exception("Error creating row in table " . $this->table);
+            $sql = "INSERT INTO " . $this->table . " (" . $query["Keys"] . ")" . " VALUES (" . $query["Parameters"] . ");";
+            $stmt = static::$pdo->prepare($sql);
+            try {
+            $result =$stmt->execute($query["Values"]);
+            if ($result) {
+                $this->response(201,["message" =>$this->getClassName()." created"]);
+            }else{
+                $this->response(500,["message"=>$this->getClassName()." creating failed."]);
+            }}catch (\PDOException $e) {
+                $this->response(500,["message"=>$this->getClassName()." creating failed.","error"=>$e->getMessage()]);
             }
-        }catch (\PDOException $e) {
-            return $e->getMessage();
-        }
-
     }
 
-    public function read($selection = "*" ,$conditions = '', $order= '', $limit= '') {
+    public function read($selection = "*" ,$conditions = '', $order= '', $limit= ''):void {
 
         $sql = "Select ".$selection." From ".$this->table." ".$conditions." ".$order." ".$limit.";";
-        $stmt = $this->pdo->prepare($sql);
-        if ($stmt->execute()) {
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $stmt = static::$pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if ($result) {
+            $this->response(200, $result);
         }else{
-            return false ;
+            $this->response(500,["message"=>"No row found in table  ".$this->getClassName()]);
         }
     }
 
-    function update($columns ,array $conditions = [],bool $autoDateUpdate = false) {
+
+
+    public function update($columns ,array $conditions = [],bool $autoDateUpdate = false):void {
         $query = $this->arrayToUpdateQuery($columns);
-        $sql = "UPDATE " . $this->table . " SET ".$query["UpdatingColumns"];
-        if ($autoDateUpdate) {
-            $time = time();
-            date_default_timezone_set('Asia/Baghdad');
-            $current = date("Y-m-d h-i-s",$time);
-        $sql = "UPDATE " . $this->table . " SET updated_at ='".$current."' ".$query["UpdatingColumns"];
-        }
+        $sql = "UPDATE `".$this->table."` SET ".($autoDateUpdate === true ? "updated_at ='".$this->currentTime()."', " : "" ).$query["UpdatingColumns"];
+
         if (!empty($conditions)) {
             $query2 = $this->arrayToCondition($conditions);
             $sql .= " ".$query2["Conditions"];
             $query["allParameters"] = array_merge($query["Values"],$query2["Values"]);
         }
-        var_dump($sql);
-        var_dump($query["allParameters"]);
-        $stmt = $this->pdo->prepare($sql);
-        if ($stmt->execute($query["allParameters"])) {
-            return true;
+
+        $stmt = static::$pdo->prepare($sql);
+        $stmt->execute($query["allParameters"]);
+        $rowChanged=$stmt->rowCount();
+        if ($rowChanged > 0) {
+            $this->response(200,["message"=>$rowChanged." Row updated in table ".$this->getClassName()." successfully."]);
         } else {
-            return throw new Exception("Error creating row in table " . $this->table);
+            $this->response(500,["message"=>"Update the row in table ".$this->getClassName()." failed."]);
         }
     }
 
-    function delete(){
-
+    function delete(array $conditions):void{
+        $query = $this->arrayToCondition($conditions);
+        $sql = "DELETE FROM " . $this->table . " " . $query["Conditions"];
+        $stmt = static::$pdo->prepare($sql);
+        $stmt->execute($query["Values"]) ;
+        $rowDeleted = $stmt->rowCount();
+        if ($rowDeleted > 0) {
+            $this->response(200,["message"=>$rowDeleted." Row deleted in table ".$this->getClassName()." successfully."]);
+        } else {
+            $this->response(500,["message"=>"Deleting the row in table ".$this->getClassName()." failed."]);
+        }
     }
 
-    function softDelete(){
-
+    function softDelete(array $conditions, bool $hidden):void{
+        $query = $this->arrayToCondition($conditions);
+        $sql = "UPDATE " . $this->table . " SET updated_at ='".$this->currentTime()."' , soft_delete = ".(int)$hidden.$query["Conditions"];
+        $stmt = static::$pdo->prepare($sql);
+        $stmt->execute($query["Values"]);
+        $rowDeleted = $stmt->rowCount();
+        if ($rowDeleted > 0) {
+            $this->response(200,["message"=>$rowDeleted." Row deleted in table ".$this->getClassName()." successfully."]);
+        } else {
+            $this->response(500,["message"=>"Deleting the row in table ".$this->getClassName()." failed."]);
+        }
     }
 
     function fetchAll(){
 
     }
 
-    function fetchOne(){
+    function fetchOne($selection = "*" ,array $conditions = []):void{
+        $query  = $this->arrayToCondition($conditions);
+        $sql    = "Select ".$selection." From ".$this->table." ".$query["Conditions"].";";
+        $stmt   = static::$pdo->prepare($sql);
+        $stmt->execute($query["Values"]);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
+        if ($result) {
+            $this->response(200, $result);
+        }else{
+            $this->response(500,["message"=>"The row in table ".$this->getClassName()." did not found."]);
+        }
     }
 
     function arrayToCondition(array $conditions):array{
         $keys = array_keys($conditions);
         $values = array_values($conditions);
         $clauses = array_map(function ($key){return $key." = ? ";},$keys);
-        $query = " Where ". implode(" AND ",$clauses);
+        $query = sizeof($clauses) ? " Where ". implode(" AND ",$clauses) : " Where $clauses[0]";
 
         return ["Conditions"=>$query,"Values"=>$values];
     }
-
     function arrayToUpdateQuery(array $data):array{
         $keys = array_keys($data);
         $values = array_values($data);
         $updateColumns = array_map(function ($key){ return $key. "= ?";},$keys);
-        $updateColumns = implode(" AND ",$updateColumns);
+        $updateColumns = implode(" , ",$updateColumns);
 
         return ["UpdatingColumns"=>$updateColumns,"Values"=>$values];
     }
-
-
     function arrayToInsertQuery(array $data):array{
         $keys = array_keys($data);
         $values = array_values($data);
@@ -107,7 +133,22 @@ class Model {
         $keys = implode(",",$keys);
         $params = implode(",",$params);
 
-        return [$keys,$params,$values];
+        return ["Keys"=>$keys,"Parameters"=>$params,"Values"=>$values];
     }
 
+
+    private function response(int $statusCode,array $result,array $header = []):void{
+        static::$requestHandler->sendResponse($statusCode,$header,$result);
+    }
+
+    private function getClassName():string {
+        $classNamespace = explode('\\', static::class);
+        return array_pop($classNamespace);
+    }
+
+    private function currentTime():string{
+        $time = time();
+        date_default_timezone_set('Asia/Baghdad');
+        return date("Y-m-d h-i-s",$time);
+    }
 }

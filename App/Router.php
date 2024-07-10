@@ -4,6 +4,7 @@ namespace App;
 
 use App\Http\RequestHandler;
 use Exception;
+use ReflectionMethod;
 
 class Router
 {
@@ -17,18 +18,20 @@ class Router
 
     public static function route($class, $function): void
     {
-        if (isset(parse_url($_SERVER['REQUEST_URI'])['query'])){
-            $urlParameters = parse_url($_SERVER['REQUEST_URI'])['query'];
-            $parameter["url_parameters"] = static::separateParameters(explode("&", $urlParameters));
-        }
-        if ($body = file_get_contents('php://input')){
-            $parameter["body_json"] = json_decode($body,true);
-        }
+        $parameters = self::fetchBodyAndUrlParameters();
 
-        if (isset($parameter)){
-        call_user_func_array(array(App::getInstance($class), $function),  array("Data"=>$parameter));
+        $requestMethod  = new ReflectionMethod($class, $function);
+        $parametersForMethod = $requestMethod->getNumberOfRequiredParameters();
+
+        if ($parametersForMethod > 0 && $parameters !== false ) {
+            call_user_func_array(array(App::getInstance($class), $function), array($parameters));
+        }elseif($parametersForMethod > 0 && $parameters === false) {
+            App::getInstance(RequestHandler::class)->sendResponse(400,["Connection"=>"close"],["Message"=>"This endpoint needs body or url parameters"]);
+        }elseif ($parametersForMethod == 0 && $parameters === false) {
+            call_user_func_array(array(App::getInstance($class), $function), array());
+        }else {
+            App::getInstance(RequestHandler::class)->sendResponse(400,["Connection"=>"close"],["Message"=>"This endpoint don't accept any body or url parameters"]);
         }
-        call_user_func_array(array(App::getInstance($class), $function),  array());
     }
 
     public function search($url): void
@@ -56,6 +59,20 @@ class Router
         $parameters [$param[0]]  = $param[1];
         }
         return $parameters ;
+    }
+
+    private static function fetchBodyAndUrlParameters():array|bool{
+        // set url parameters if exist
+        if (isset(parse_url($_SERVER['REQUEST_URI'])['query'])){
+            $urlParameters = parse_url($_SERVER['REQUEST_URI'])['query'];
+            $parameter["url_parameters"] = static::separateParameters(explode("&", $urlParameters));
+        }
+        // set url body if exist
+        if ($body = file_get_contents('php://input')){
+            $parameter["body_json"] = json_decode($body,true);
+        }
+
+        return ($parameter ?? false);
     }
 
 }

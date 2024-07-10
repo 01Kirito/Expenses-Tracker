@@ -5,17 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3507deca-f3c6-4678-90c0-93858e381227" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Expenses Tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Expenses Tracker.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Controller/ControllerInvoice.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Controller/ControllerUser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Migration/seed_user.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/InvoiceController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/UserController.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Http/RequestHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Http/RequestHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Migration/feeding_category.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/feeding_category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Migration/querys.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/querys.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Model/Budget.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Budget.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Model/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Model/Invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Invoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Model/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Model/Plan.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Plan.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Model/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Router.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/loadContainer.php" beforeDir="false" afterPath="$PROJECT_DIR$/loadContainer.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,24 +52,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature__request__handler&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/Basics/Expenses Tracker&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "PHP Script.Schema_design.php.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature__request__handler",
+    "last_opened_file_path": "C:/laragon/www/Basics/Expenses Tracker",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\laragon\www\Basics\Expenses Tracker\src" />
       <recent name="C:\laragon\www\Basics\Expenses Tracker" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Schema_design.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/App/Migration/Schema_design.php">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHP Script.Schema_design.php" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -87,7 +104,7 @@
       <workItem from="1720372126330" duration="9821000" />
       <workItem from="1720386665722" duration="25700000" />
       <workItem from="1720471954909" duration="268000" />
-      <workItem from="1720472238075" duration="27049000" />
+      <workItem from="1720472238075" duration="58913000" />
     </task>
     <servers />
   </component>

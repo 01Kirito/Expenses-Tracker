@@ -5,9 +5,9 @@ namespace App\Http;
 class RequestHandler {
    static protected array $commonResponseHeaders = [
         'Content-Type' => 'application/json',
-        'Accept' => 'application/json',
+//        'Accept' => 'application/json',
 //        'Transfer-Encoding' => 'chunked', makeing error see the determined values for it and how it used
-        'Server' => 'Apache',
+//        'Server' => 'Apache',
         'Connection' => 'keep-alive',
         'Date' => '',
     ];
@@ -27,13 +27,11 @@ class RequestHandler {
         'Date' => '',
     ];
 
-
-    public function sendResponse( int $statusCode ,?array $customHeaders = null ,?array $data =null){
+    public function sendResponse( int $statusCode ,?array $customHeaders = null ,?array $data =[]){
        http_response_code($statusCode);
        $headers = $customHeaders === null ? self::$commonResponseHeaders : self::setCustomHeader($customHeaders);
        $this->setHeader($headers);
        echo json_encode($data);
-
     }
 
 

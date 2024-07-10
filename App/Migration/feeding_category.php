@@ -1,6 +1,4 @@
 <?php
-// get parameters for the connection
-require_once 'Parameter.php';
 
 //$sqlAddinCategories = "insert into categories (name,description) values ('Education','For education purposes like buy stuffs for study'),('Renting','For renting purposes like renting house or car ..etc'),('Food',default),('Clothe',default)";
 $sqlAddinCategories = "insert into categories (name,description) values ('Card',default),('Service',default)";
