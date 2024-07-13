@@ -47,8 +47,8 @@ $sqlInvoice = "CREATE TABLE invoices (
     purchase_date DATE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (category_id) REFERENCES categories(category_id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ,
+    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE
 )";
 $messageInvoice = "Invoice table created";
 
@@ -59,7 +59,7 @@ $sqlBudget = "CREATE TABLE budgets (
     total  DECIMAL(10,2) NOT NULL default 0.00,
     spent  DECIMAL(10,2) NOT NULL default 0.00,
     salary DECIMAL(10,2) NOT NULL default 0.00,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )";
 $messageBudget = "Budget table created";
 
@@ -68,7 +68,7 @@ $messageBudget = "Budget table created";
 $sqlPreference = "CREATE TABLE preferences (
     user_id INT NOT NULL,
     theme VARCHAR(50) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )";
 $messagePreference = "preference table created";
 
@@ -76,7 +76,7 @@ $messagePreference = "preference table created";
 // Create plans table
 $sqlPlans = "CREATE TABLE plans (
     user_id INT NOT NULL ,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )";
 $messagePlans = "plans table created";
 

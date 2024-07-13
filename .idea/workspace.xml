@@ -5,14 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3507deca-f3c6-4678-90c0-93858e381227" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Controller/Controller.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Middleware/Admin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Middleware/Api.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Middleware/Middleware.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Expenses Tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Expenses Tracker.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/App.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerBudget.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerBudget.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Controller/ControllerCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerCategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerInvoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerInvoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerPlan.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerPlan.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Controller/ControllerPreference.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerPreference.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Controller/ControllerUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Http/RequestHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Http/RequestHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Migration/feeding_category.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/Seeder/seed_category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Migration/querys.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/querys.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Migration/seed_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/Seeder/seed_user.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Model/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Router.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loadContainer.php" beforeDir="false" afterPath="$PROJECT_DIR$/loadContainer.php" afterDir="false" />
     </list>
-    <list default="true" id="3507deca-f3c6-4678-90c0-93858e381227" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,6 +54,13 @@
     <include_path>
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/vendor/rbdwllr/reallysimplejwt" />
+      <path value="$PROJECT_DIR$/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -44,9 +74,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "PHP Script.Schema_design.php.executor": "Run",
+    "PHP Script.querys.php.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feature__adding__logics",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "feature__authentication",
     "last_opened_file_path": "C:/laragon/www/Basics/Expenses Tracker",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -58,17 +88,22 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\ExpensesTracker\App\Migration\Seeder" />
       <recent name="C:\laragon\www\Basics\Expenses Tracker\src" />
       <recent name="C:\laragon\www\Basics\Expenses Tracker" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="PHP Script.Schema_design.php">
     <configuration name="Schema_design.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/App/Migration/Schema_design.php">
+      <method v="2" />
+    </configuration>
+    <configuration name="querys.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/App/Migration/querys.php">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="PHP Script.Schema_design.php" />
+        <item itemvalue="PHP Script.querys.php" />
       </list>
     </recent_temporary>
   </component>
@@ -95,10 +130,14 @@
       <workItem from="1720386665722" duration="25700000" />
       <workItem from="1720471954909" duration="268000" />
       <workItem from="1720472238075" duration="58913000" />
+      <workItem from="1720676925189" duration="51343000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
 </project>

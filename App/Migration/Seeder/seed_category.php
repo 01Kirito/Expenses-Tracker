@@ -6,7 +6,7 @@ $sqlAddinCategories = "insert into categories (name,description) values ('Card',
 try {
     // Connect to MySQL database
 
-    $pdo = require_once 'connection.php';
+    $pdo = require_once '../connection.php';
     echo "Connected to the server successfully<br>";
 
     $pdo->beginTransaction();

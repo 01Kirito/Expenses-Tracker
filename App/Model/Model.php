@@ -31,12 +31,10 @@ class Model {
     }
 
     public function read($selection = "*" ,$conditions = '', $order= '', $limit= ''):void {
-
         $sql = "Select ".$selection." From ".$this->table." ".$conditions." ".$order." ".$limit.";";
         $stmt = static::$pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
         if ($result) {
             $this->response(200, $result);
         }else{
@@ -44,9 +42,32 @@ class Model {
         }
     }
 
+    public function getAll($selection = "*") {
+        $sql = "Select ".$selection." From ".$this->table." ;";
+        $stmt = static::$pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        if ($result) {
+            return $result ;
+        }else{
+            $this->response(500,["message"=>"No row found in table  ".$this->table]);
+        }
+    }
 
 
-    public function update($columns ,array $conditions = [],bool $autoDateUpdate = false):void {
+    public function searchByGrouping( $groupByColumns , $selection = "*" ,$conditions = ''){
+        $sql = "Select ".$selection." From ".$this->table." ".$conditions." GROUP BY ".$groupByColumns." ".";";
+        $stmt = static::$pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        if ($result) {
+           return $result ;
+        }else{
+            $this->response(500,["message"=>"No row found in table  ".$this->table]);
+        }
+    }
+
+    public function updateWithResponse($columns ,array $conditions = [],bool $autoDateUpdate = false):void {
         $query = $this->arrayToUpdateQuery($columns);
         $sql = "UPDATE `".$this->table."` SET ".($autoDateUpdate === true ? "updated_at ='".$this->currentTime()."', " : "" ).$query["UpdatingColumns"];
 
@@ -66,6 +87,26 @@ class Model {
         }
     }
 
+    public function update($columns ,array $conditions = [],bool $autoDateUpdate = false) {
+        $query = $this->arrayToUpdateQuery($columns);
+        $sql = "UPDATE `".$this->table."` SET ".($autoDateUpdate === true ? "updated_at ='".$this->currentTime()."', " : "" ).$query["UpdatingColumns"];
+
+        if (!empty($conditions)) {
+            $query2 = $this->arrayToCondition($conditions);
+            $sql .= " ".$query2["Conditions"];
+            $query["allParameters"] = array_merge($query["Values"],$query2["Values"]);
+        }
+
+        $stmt = static::$pdo->prepare($sql);
+        $stmt->execute($query["allParameters"]);
+        $rowChanged=$stmt->rowCount();
+        if ($rowChanged > 0) {
+            return $rowChanged ;
+        } else {
+            return $rowChanged ;
+        }
+    }
+
     function delete(array $conditions):void{
         $query = $this->arrayToCondition($conditions);
         $sql = "DELETE FROM " . $this->table . " " . $query["Conditions"];
@@ -79,9 +120,9 @@ class Model {
         }
     }
 
-    function softDelete(array $conditions, bool $hidden):void{
+    function softDelete(array $conditions, bool $makeItHidden):void{
         $query = $this->arrayToCondition($conditions);
-        $sql = "UPDATE " . $this->table . " SET updated_at ='".$this->currentTime()."' , soft_delete = ".(int)$hidden.$query["Conditions"];
+        $sql = "UPDATE " . $this->table . " SET updated_at ='".$this->currentTime()."' , soft_delete = ".(int)$makeItHidden.$query["Conditions"];
         $stmt = static::$pdo->prepare($sql);
         $stmt->execute($query["Values"]);
         $rowDeleted = $stmt->rowCount();
@@ -108,6 +149,22 @@ class Model {
         }else{
             $this->response(500,["message"=>"The row in table ".$this->table." did not found."]);
         }
+    }
+
+    function searchForOneRow($selection = "*" ,array $conditions = []){
+        $query  = $this->arrayToCondition($conditions);
+        $sql    = "Select ".$selection." From ".$this->table." ".$query["Conditions"].";";
+        $stmt   = static::$pdo->prepare($sql);
+        $stmt->execute($query["Values"]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    function searchForRows(array $conditions,$selection = "*" ){
+        $query  = empty($this->arrayToCondition($conditions)) ? '': $this->arrayToCondition($conditions);
+        $sql    = "Select ".$selection." From ".$this->table." ".$query["Conditions"].";";
+        $stmt   = static::$pdo->prepare($sql);
+        $stmt->execute($query["Values"]);
+        return $stmt->fetchall(\PDO::FETCH_ASSOC);
     }
 
 
@@ -165,4 +222,5 @@ class Model {
         date_default_timezone_set('Asia/Baghdad');
         return date("Y-m-d h-i-s",$time);
     }
+
 }

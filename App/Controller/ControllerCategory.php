@@ -7,7 +7,7 @@ use App\Model\Category;
 use App\Model\Invoice;
 use App\Model\Plan;
 
-class ControllerCategory
+class ControllerCategory extends Controller
 {
 
     public static $Category ;
@@ -25,6 +25,7 @@ class ControllerCategory
     public function store(array $Data):void{
         static::$Category->create($Data['body_json']) ;
         App::getInstance(Plan::class)->addColumn($Data['body_json']['name'],"DECIMAL(10,2) NOT NULL default 0.00");
+        App::getInstance(Plan::class)->addColumn($Data['body_json']['name']."_balance","DECIMAL(10,2) NOT NULL default 0.00");
     }
 
     public function show(array $Data):void{
@@ -34,7 +35,7 @@ class ControllerCategory
     }
 
     public function update($Data):void{
-        static::$Category->update($Data['body_json'],$Data['url_parameters'],false);
+        static::$Category->updateWithResponse($Data['body_json'],$Data['url_parameters'],false);
     }
 
     public function delete(array $Data):void{

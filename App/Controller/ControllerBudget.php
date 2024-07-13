@@ -6,7 +6,7 @@ use App\App;
 use App\Model\Budget;
 use App\Model\Invoice;
 
-class ControllerBudget
+class ControllerBudget extends Controller
 {
     public static $Budget ;
 
@@ -32,7 +32,7 @@ class ControllerBudget
     }
 
     public function update($Data):void{
-        static::$Budget->update($Data['body_json'],$Data['url_parameters'],false);
+        static::$Budget->updateWithResponse($Data['body_json'],$Data['url_parameters'],false);
     }
 
     public function delete(array $Data):void{

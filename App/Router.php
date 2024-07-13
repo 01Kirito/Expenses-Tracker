@@ -3,54 +3,66 @@
 namespace App;
 
 use App\Http\RequestHandler;
+use App\Middleware\Middleware;
 use Exception;
 use ReflectionMethod;
 
 class Router
 {
     private static array $routes;
+    private static $requestHandler ;
 
-
-    function addRoute($route, $action, $method): void
-    {
-        static::$routes[$route] = ["Action" => $action, "Method" => strtoupper($method)];
+    public function __construct(){
+        static::$requestHandler = App::getInstance(RequestHandler::class);
     }
+
+    function addRoute($route, $action, $method, $middleware): void
+    {
+        static::$routes[$route] = ["Action" => $action, "Method" => strtoupper($method), "Middleware"=>ucfirst($middleware)];
+    }
+
 
     public static function route($class, $function): void
     {
-        $parameters = self::fetchBodyAndUrlParameters();
 
+        $parameters = self::fetchBodyAndUrlParameters();
         $requestMethod  = new ReflectionMethod($class, $function);
         $parametersForMethod = $requestMethod->getNumberOfRequiredParameters();
 
         if ($parametersForMethod > 0 && $parameters !== false ) {
             call_user_func_array(array(App::getInstance($class), $function), array($parameters));
         }elseif($parametersForMethod > 0 && $parameters === false) {
-            App::getInstance(RequestHandler::class)->sendResponse(400,["Connection"=>"close"],["Message"=>"This endpoint needs body or url parameters"]);
+            static::$requestHandler->sendResponse(400,["Connection"=>"close"],["Message"=>"This endpoint needs body or url parameters"]);
         }elseif ($parametersForMethod == 0 && $parameters === false) {
             call_user_func_array(array(App::getInstance($class), $function), array());
         }else {
-            App::getInstance(RequestHandler::class)->sendResponse(400,["Connection"=>"close"],["Message"=>"This endpoint don't accept any body or url parameters"]);
+            static::$requestHandler->sendResponse(400,["Connection"=>"close"],["Message"=>"This endpoint don't accept any body or url parameters"]);
         }
     }
 
-    public function search($url): void
-    {
-        $requestHandler = App::getInstance(RequestHandler::class);
+    public function search($url): void{
         if (key_exists($url, static::$routes)) {
             if ($_SERVER['REQUEST_METHOD'] === static::$routes[$url]["Method"]) {
-                $routeParameter = static::$routes[$url];
-                $this->route(...$routeParameter["Action"]);
+                self::checkMiddleware(static::$routes[$url]["Middleware"],$url);
             } else {
-                $requestHandler->sendResponse(statusCode: 300, data: ["Message" => "Mismatch Request Method"]);
+                static::$requestHandler->sendResponse(statusCode: 300, data: ["Message" => "Mismatch Request Method"]);
             }
         } else {
-            $requestHandler->sendResponse(statusCode: 404,data: ["Message" => "Endpoint Not Found"]);
-
+            static::$requestHandler->sendResponse(statusCode: 404,data: ["Message" => "Endpoint Not Found"]);
         }
-
     }
 
+
+    private function checkMiddleware($middleware,$url):void{
+        $class = "App\\Middleware\\".$middleware ;
+        if ($middleware == "Guest") {
+            $this->route(...static::$routes[$url]["Action"]);
+        }elseif (App::getInstance($class)->authenticate()) {
+            $this->route(...static::$routes[$url]["Action"]);
+        }else{
+            static::$requestHandler->sendResponse(401,[],["message"=>"Authentication Failed"]);
+        }
+    }
 
     private static function separateParameters($urlParameters): array{
         $parameters = null ;
@@ -74,5 +86,6 @@ class Router
 
         return ($parameter ?? false);
     }
+
 
 }

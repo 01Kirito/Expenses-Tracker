@@ -3,26 +3,59 @@
 namespace App\Controller;
 
 use App\App;
+use App\Auth;
 use App\Database;
 use App\Http\RequestHandler;
 use App\Model\Budget;
+use App\Model\Category;
+use App\Model\Invoice;
 use App\Model\Plan;
 use App\Model\Preference;
 use App\Model\User;
+use ReallySimpleJWT\Token;
 
-class ControllerUser
+class ControllerUser extends Controller
 {
 
     public static $User ;
+    public static $requestHandler ;
 
     public function __construct()
     {
         static::$User = App::getInstance(User::class);
+        static::$requestHandler = App::getInstance(RequestHandler::class);
     }
 
-    public function index(): void
-    {
-         static::$User->read();
+    public function login($credential):void{
+      $result= static::$User->searchForOneRow(selection:"id" ,conditions: $credential['body_json']);
+      if ($result){
+          $payload = [ 'iat' => time(), 'uid' => $result["id"], 'exp' => time() + 86400, 'iss' => 'localhost'];
+          $token = Token::customPayload($payload, $_ENV["JWT_SECRET"]);
+          static::$requestHandler->sendResponse(200,["Authorization"=>$token],["message"=>"Login Successful"]);
+      }else{
+          static::$requestHandler->sendResponse(401,[],["message"=>"Login failed."]);
+      }
+    }
+
+
+    public function dashboard():void{
+
+          $user         = $this->getAuthenticatedUser();
+          $decidedMoney = App::getInstance(Plan::class)->searchForOneRow(conditions: ["user_id"=>$user['id']]);
+          $categories   = App::getInstance(Category::class)->getAll("category_id,name");
+
+          foreach ($categories as $category){
+              $usedAmount = $decidedMoney[$category["name"]."_balance"] ?? 0;
+              $planned = $decidedMoney[$category["name"]];
+              $percentage = ($planned != 0) ? ($usedAmount / $planned * 100) : 0;
+
+              $analysis[$category['category_id']] = ["name"=>$category['name'],"amount"=>$usedAmount,"plan"=>$planned,"percentage"=>$percentage];
+          }
+          RequestHandler::sendResponse(200,[],$analysis);
+    }
+
+    public function index(): void{
+        static::$User->read();
     }
 
     public function store(array $Data):void{
@@ -33,22 +66,26 @@ class ControllerUser
         App::getInstance(Budget::class)->create(["user_id"=>$lastInsertId]);
     }
 
-    public function show(array $Data):void{
-
-        static::$User->fetchOne(conditions: $Data['url_parameters']);
-
+    public function show():void{
+        $user = $this->getAuthenticatedUser();
+        $pairs["id"] =$user["id"];
+        static::$User->fetchOne(conditions: $pairs);
     }
 
     public function update($Data):void{
-        static::$User->update($Data['body_json'],$Data['url_parameters'],false);
+        $authenticatedUser = $this->getAuthenticatedUser();
+        static::$User->updateWithResponse($Data['body_json'],["id"=>$authenticatedUser['id']],false);
     }
 
-    public function delete(array $Data):void{
-        static::$User->delete($Data['url_parameters']);
+    public function delete():void{
+        $authenticatedUser = $this->getAuthenticatedUser();
+        static::$User->delete(["id"=>$authenticatedUser['id']]);
+
     }
 
-    public function softDelete(array $Data):void{
-        static::$User->softDelete($Data['url_parameters'], hidden:True ) ;
+    public function softDelete():void{
+        $authenticatedUser = $this->getAuthenticatedUser();
+        static::$User->softDelete(["id"=>$authenticatedUser['id']], makeItHidden:True ) ;
     }
 
 }
