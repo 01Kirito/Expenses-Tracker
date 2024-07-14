@@ -21,11 +21,33 @@ use App\Model\Plan;
 use App\Model\Preference;
 use App\Model\User;
 use App\Router;
+use Predis\Client;
+use Dotenv\Dotenv;
+
+// using below class to load the .env file that holds the sensitive data
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 $container = new Container();
 App::setContainer($container);
 // order those instances are very important because it will make error if you don't do it in the right way for example we
 // use User instance in the ControllerUser class so that is why .
+
+
+// loading the redis object to use caching
+$client = new Predis\Client([
+    'scheme' => $_ENV["REDIS_SCHEME"],
+    'host'=>$_ENV["REDIS_HOST"],
+    "port"=>$_ENV["REDIS_PORT"],
+    "username"=>$_ENV["REDIS_USERNAME"],
+    "password"=>$_ENV["REDIS_PASSWORD"],
+    "database"=>$_ENV["REDIS_DATABASE"],
+    "read_write_timeout"=>$_ENV["REDIS_READ_WRITE_TIMEOUT"],
+    "timeout"=>$_ENV["REDIS_TIMEOUT"]
+]);
+
+$container->set(Client::class,$client);
+
 
 // middlewares
 $container->set(Middleware::class,new Middleware);

@@ -3,16 +3,15 @@
 namespace App\Controller;
 
 use App\App;
-use App\Auth;
 use App\Database;
 use App\Http\RequestHandler;
 use App\Model\Budget;
 use App\Model\Category;
-use App\Model\Invoice;
 use App\Model\Plan;
 use App\Model\Preference;
 use App\Model\User;
 use ReallySimpleJWT\Token;
+use Predis\Client as RedisClient;
 
 class ControllerUser extends Controller
 {
@@ -53,6 +52,25 @@ class ControllerUser extends Controller
           }
           RequestHandler::sendResponse(200,[],$analysis);
     }
+
+
+    public function dashboardCache():void{
+
+        $user         = $this->getAuthenticatedUser();
+        $decidedMoney = App::getInstance(Plan::class)->searchForOneRow(conditions: ["user_id"=>$user['id']]);
+        $redis        = App::getInstance(RedisClient::class);
+        $categories   = $redis->hgetAll("categories");
+        var_dump($categories);
+        foreach ($categories as $key=>$categoryName){
+            $usedAmount = $decidedMoney[$categoryName."_balance"] ?? 0;
+            $planned = $decidedMoney[$categoryName];
+            $percentage = ($planned != 0) ? ($usedAmount / $planned * 100) : 0;
+
+            $analysis[$key] = ["name"=>$categoryName,"amount"=>$usedAmount,"plan"=>$planned,"percentage"=>$percentage];
+        }
+        RequestHandler::sendResponse(200,[],$analysis);
+    }
+
 
     public function index(): void{
         static::$User->read();

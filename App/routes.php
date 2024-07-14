@@ -18,6 +18,7 @@ $router->addRoute("/ExpensesTracker/login",[ControllerUser::class,'login'],'post
 // user routes
 $router->addRoute("/ExpensesTracker/user",[ControllerUser::class,'index'],'GET','api');
 $router->addRoute("/ExpensesTracker/user/dashboard",[ControllerUser::class,'dashboard'],'GET','api');
+$router->addRoute("/ExpensesTracker/user/dashboard_cache",[ControllerUser::class,'dashboardCache'],'GET','api');
 $router->addRoute("/ExpensesTracker/user/store",[ControllerUser::class,'store'],'POST','guest');
 $router->addRoute("/ExpensesTracker/user/update",[ControllerUser::class,'update'],'put','api');  
 $router->addRoute("/ExpensesTracker/user/softDelete",[ControllerUser::class,'softDelete'],'delete','api'); 
@@ -30,7 +31,7 @@ $router->addRoute("/ExpensesTracker/user/invoice",[ControllerInvoice::class,'ind
 $router->addRoute("/ExpensesTracker/user/invoice/store",[ControllerInvoice::class,'store'],'POST','api');   
 $router->addRoute("/ExpensesTracker/user/invoice/update",[ControllerInvoice::class,'update'],'put','api');  
 $router->addRoute("/ExpensesTracker/user/invoice/softDelete",[ControllerInvoice::class,'softDelete'],'delete','api'); 
-$router->addRoute("/ExpensesTracker/user/invoice/delete",[ControllerInvoice::class,'delete'],'delete','api'); 
+$router->addRoute("/ExpensesTracker/user/invoice/delete",[ControllerInvoice::class,'delete'],'delete','api');
 $router->addRoute("/ExpensesTracker/user/invoice/show",[ControllerInvoice::class,'show'],'get','api');        
 
 
