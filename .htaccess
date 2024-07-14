@@ -1,6 +1,11 @@
 RewriteEngine On
 RewriteBase /ExpensesTracker/
 
+# This will let authorization header go to the server elsewise it will not show in the server
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
+
 # Redirect all requests to index.php unless a file or directory exists
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

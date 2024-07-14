@@ -27,22 +27,22 @@ class RequestHandler {
         'Date' => '',
     ];
 
-    public function sendResponse( int $statusCode ,?array $customHeaders = null ,?array $data =[]){
+    public static function sendResponse( int $statusCode ,?array $customHeaders = null ,?array $data =[]){
        http_response_code($statusCode);
-       $headers = $customHeaders === null ? self::$commonResponseHeaders : self::setCustomHeader($customHeaders);
-       $this->setHeader($headers);
+       $headers = $customHeaders === null ? self::$commonResponseHeaders : static::setCustomHeader($customHeaders);
+       static::setHeader($headers);
        echo json_encode($data);
     }
 
 
-    protected function setHeader(array $headers): void
+    private static function setHeader(array $headers): void
     {
         foreach($headers as $key => $value){
             header($key.':'.$value);
         }
     }
 
-    protected function setCustomHeader(array $headers): array
+    private static function setCustomHeader(array $headers): array
     {
 
         $customHeader = self::$commonResponseHeaders;
