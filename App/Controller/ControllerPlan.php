@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\App;
 use App\Model\Plan;
 
-class ControllerPlan
+class ControllerPlan extends Controller
 {
 
     public static $Plan ;
@@ -25,14 +25,15 @@ class ControllerPlan
         static::$Plan->create($pairs) ;
     }
 
-    public function show(array $Data):void{
-
-        static::$Plan->fetchOne(conditions: $Data['url_parameters']);
+    public function show():void{
+        $user = $this->getAuthenticatedUser();
+        static::$Plan->fetchOne(conditions: ["user_id" => $user['id']]);
 
     }
 
     public function update($Data):void{
-        static::$Plan->update($Data['body_json'],$Data['url_parameters'],false);
+        $user = $this->getAuthenticatedUser();
+        static::$Plan->updateWithResponse($Data['body_json'],["user_id"=>$user['id']],false);
     }
 
     public function delete(array $Data):void{

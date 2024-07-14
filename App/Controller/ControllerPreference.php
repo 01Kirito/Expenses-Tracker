@@ -6,7 +6,7 @@ use App\App;
 use App\Model\Invoice;
 use App\Model\Preference;
 
-class ControllerPreference
+class ControllerPreference extends Controller
 {
     public static $Preference ;
 
@@ -32,7 +32,7 @@ class ControllerPreference
     }
 
     public function update($Data):void{
-        static::$Preference->update($Data['body_json'],$Data['url_parameters'],false);
+        static::$Preference->updateWithResponse($Data['body_json'],$Data['url_parameters'],false);
     }
 
     public function delete(array $Data):void{

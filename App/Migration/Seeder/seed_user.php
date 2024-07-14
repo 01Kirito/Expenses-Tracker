@@ -1,6 +1,6 @@
 <?php
 
-$pdo = require_once 'connection.php';
+$pdo = require_once '../connection.php';
 
 // Number of users to seed
 $numUsers = 1000;
@@ -25,7 +25,7 @@ $stmt = $pdo->prepare($sql);
 for ($i = 0; $i < $numUsers; $i++) {
     $first_name = generateRandomString();
     $last_name = generateRandomString();
-    $email = strtolower($first_name) . '.' . strtolower($last_name) . '@example.com'; // Generate unique email
+    $email = strtolower($first_name) . 'Migration' . strtolower($last_name) . '@example.com'; // Generate unique email
     $password = password_hash('password123', PASSWORD_DEFAULT); // Hashed password example
     $created_at = date('Y-m-d H:i:s');
     $updated_at = date('Y-m-d H:i:s');
