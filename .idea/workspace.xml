@@ -4,14 +4,6 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3507deca-f3c6-4678-90c0-93858e381227" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerCategory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerPreference.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerPreference.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Model/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/routes.php" afterDir="false" />
-    </list>
     <list default="true" id="3507deca-f3c6-4678-90c0-93858e381227" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,8 +37,7 @@
   "keyToString": {
     "PHP Script.Schema_design.php.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feature__adding__logics",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "feature__adding__cache",
     "last_opened_file_path": "C:/laragon/www/Basics/Expenses Tracker",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
