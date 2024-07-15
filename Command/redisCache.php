@@ -1,5 +1,4 @@
 <?php
-
 use App\App;
 use App\Model\Category;
 use Predis\Client;
@@ -11,14 +10,10 @@ $categories = App::getInstance(Category::class)->getAll("category_id,name");
 $redis = App::getInstance(Client::class);
 $redis->del("categories");
 
-
-
-
-
 foreach ($categories as $category) {
     $redis->hset("categories", $category["category_id"], $category["name"]);
 }
-$redis->expire("categories", 1800);
+$redis->expire("categories", 86400);
 
 
 
