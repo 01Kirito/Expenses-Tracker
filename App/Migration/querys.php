@@ -1,7 +1,7 @@
 <?php
 
 // drop database
-$sqlDropDatabase = "Drop database expenses_tracker";
+$sqlDropDatabase = "Drop database IF EXISTS expenses_tracker";
 $messageDropDatabase = "Database droped";
 
 // create database
@@ -30,8 +30,10 @@ $messageUser = "Users table created";
 // create category table 
 $sqlCategories = "CREATE TABLE categories (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT default null,
     name VARCHAR(50) NOT NULL unique ,
-    description VARCHAR(255)
+    description VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE 
 )";
 $messageCategories = "Categories table created";
 
@@ -76,20 +78,49 @@ $messagePreference = "preference table created";
 // Create plans table
 $sqlPlans = "CREATE TABLE plans (
     user_id INT NOT NULL ,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    custom_plan BOOLEAN NOT NULL DEFAULT FALSE, 
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE    
 )";
 $messagePlans = "plans table created";
 
+// Create custom_plans table
+$sqlCustomPlans = "CREATE TABLE custom_plans (
+    user_id INT NOT NULL ,
+    category_id INT NOT NULL ,
+    category_plan DECIMAL(10,2) NOT NULL default 0.00,
+    category_balance DECIMAL(10,2) NOT NULL default 0.00,
+    constraint UNIQUE_category_name UNIQUE (user_id, category_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ,
+    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE
+)";
+$messageCustomPlans = "custom_plans table created";
+
+// Create device_tokens table
+$sqlDeviceToken = "CREATE TABLE device_tokens (
+    token_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL ,
+    token VARCHAR(220) NOT NULL ,
+    device_type VARCHAR(200) NOT NULL ,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+)";
+$messageDeviceToken = "device_tokens table created";
+
+
+
 $querys = [
- [$sqlDropDatabase,$messageDropDatabase]
-,[$sqlDatabase,$messageDatabase]
-,[$sqlUseDatabase,$messageUseDatabase]
-,[$sqlUser,$messageUser]
-,[$sqlCategories,$messageCategories]
-,[$sqlInvoice,$messageInvoice]
-,[$sqlBudget,$messageBudget]
-,[$sqlPreference,$messagePreference]
-,[$sqlPlans,$messagePlans],
+    [$sqlDropDatabase,$messageDropDatabase]
+    ,[$sqlDatabase,$messageDatabase]
+    ,[$sqlUseDatabase,$messageUseDatabase]
+    ,[$sqlUser,$messageUser]
+    ,[$sqlCategories,$messageCategories]
+    ,[$sqlInvoice,$messageInvoice]
+    ,[$sqlBudget,$messageBudget]
+    ,[$sqlPreference,$messagePreference]
+    ,[$sqlCustomPlans,$messageCustomPlans]
+    ,[$sqlPlans,$messagePlans]
+    ,[$sqlDeviceToken,$messageDeviceToken]
 ];
 
 return $querys; 

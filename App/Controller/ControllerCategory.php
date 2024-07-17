@@ -19,11 +19,11 @@ class ControllerCategory extends Controller
 
     public function index(): void
     {
-        static::$Category->read();
+        static::$Category->readWithResponse();
     }
 
     public function store(array $Data):void{
-        static::$Category->create($Data['body_json']) ;
+        static::$Category->createWithResponse($Data['body_json']) ;
         App::getInstance(Plan::class)->addColumn($Data['body_json']['name'],"DECIMAL(10,2) NOT NULL default 0.00");
         App::getInstance(Plan::class)->addColumn($Data['body_json']['name']."_balance","DECIMAL(10,2) NOT NULL default 0.00");
     }
@@ -39,7 +39,7 @@ class ControllerCategory extends Controller
     }
 
     public function delete(array $Data):void{
-        static::$Category->delete($Data['url_parameters']);
+        static::$Category->deleteWithResponse($Data['url_parameters']);
     }
 
 

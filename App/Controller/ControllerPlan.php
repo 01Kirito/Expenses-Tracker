@@ -17,12 +17,11 @@ class ControllerPlan extends Controller
 
     public function index(): void
     {
-        static::$Plan->read();
+        static::$Plan->readWithResponse();
     }
 
     public function store(array $Data):void{
-        $pairs = $Data['body_json'];
-        static::$Plan->create($pairs) ;
+        static::$Plan->createWithResponse($Data['body_json']) ;
     }
 
     public function show():void{
@@ -37,7 +36,7 @@ class ControllerPlan extends Controller
     }
 
     public function delete(array $Data):void{
-        static::$Plan->delete($Data['url_parameters']);
+        static::$Plan->deleteWithResponse($Data['url_parameters']);
     }
 
 }

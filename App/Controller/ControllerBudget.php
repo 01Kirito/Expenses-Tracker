@@ -17,12 +17,12 @@ class ControllerBudget extends Controller
 
     public function index(): void
     {
-        static::$Budget->read();
+        static::$Budget->readWithResponse();
     }
 
     public function store(array $Data):void{
         $pairs = $Data['body_json'];
-        static::$Budget->create($pairs) ;
+        static::$Budget->createWithResponse($pairs) ;
     }
 
     public function show(array $Data):void{
@@ -36,7 +36,7 @@ class ControllerBudget extends Controller
     }
 
     public function delete(array $Data):void{
-        static::$Budget->delete($Data['url_parameters']);
+        static::$Budget->deleteWithResponse($Data['url_parameters']);
     }
 
 

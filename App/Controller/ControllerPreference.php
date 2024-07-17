@@ -17,12 +17,12 @@ class ControllerPreference extends Controller
 
     public function index(): void
     {
-        static::$Preference->read();
+        static::$Preference->readWithResponse();
     }
 
     public function store(array $Data):void{
         $pairs = $Data['body_json'];
-        static::$Preference->create($pairs) ;
+        static::$Preference->createWithResponse($pairs) ;
     }
 
     public function show(array $Data):void{
@@ -36,7 +36,7 @@ class ControllerPreference extends Controller
     }
 
     public function delete(array $Data):void{
-        static::$Preference->delete($Data['url_parameters']);
+        static::$Preference->deleteWithResponse($Data['url_parameters']);
     }
 
 }

@@ -1,9 +1,11 @@
 <?php
 
-$pdo = require_once '../connection.php';
+use App\App;
+use App\Model\User;
 
+$userModel = App::getInstance(User::class);
 // Number of users to seed
-$numUsers = 1000;
+$numUsers = $_ENV['NUM_USERS'];
 
 // Function to generate a random string
 function generateRandomString($length = 8)
@@ -16,33 +18,18 @@ function generateRandomString($length = 8)
     return $randomString;
 }
 
-// Prepare the SQL statement for inserting users
-$sql = "INSERT INTO users (first_name, last_name, email, password, created_at, updated_at, soft_delete) 
-        VALUES (:first_name, :last_name, :email, :password, :created_at, :updated_at, :soft_delete)";
-$stmt = $pdo->prepare($sql);
-
 // Seed users
 for ($i = 0; $i < $numUsers; $i++) {
     $first_name = generateRandomString();
     $last_name = generateRandomString();
     $email = strtolower($first_name) . 'Migration' . strtolower($last_name) . '@example.com'; // Generate unique email
-    $password = password_hash('password123', PASSWORD_DEFAULT); // Hashed password example
+    $password = 'password123';
     $created_at = date('Y-m-d H:i:s');
     $updated_at = date('Y-m-d H:i:s');
     $soft_delete = 0; // Assuming soft_delete is an integer (0 for active, 1 for deleted)
-
-    // Bind parameters and execute the statement
-    $stmt->bindParam(':first_name', $first_name);
-    $stmt->bindParam(':last_name', $last_name);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $password);
-    $stmt->bindParam(':created_at', $created_at);
-    $stmt->bindParam(':updated_at', $updated_at);
-    $stmt->bindParam(':soft_delete', $soft_delete);
-
-    $stmt->execute();
+    $data = ["first_name"=>$first_name,"last_name"=>$last_name,"email"=>$email,"password"=>$password,"created_at"=>$created_at,"updated_at"=>$updated_at,"soft_delete"=>$soft_delete];
+    $userModel->create($data);
 }
 
-echo "Users seeded successfully.";
-
+echo "Users seeded successfully.\n";
 

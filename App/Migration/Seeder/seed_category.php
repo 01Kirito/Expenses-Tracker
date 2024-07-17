@@ -1,23 +1,22 @@
 <?php
 
-//$sqlAddinCategories = "insert into categories (name,description) values ('Education','For education purposes like buy stuffs for study'),('Renting','For renting purposes like renting house or car ..etc'),('Food',default),('Clothe',default)";
-$sqlAddinCategories = "insert into categories (name,description) values ('Card',default),('Service',default)";
 
-try {
-    // Connect to MySQL database
+use App\App;
+use App\Model\Category;
+use App\Model\Plan;
 
-    $pdo = require_once '../connection.php';
-    echo "Connected to the server successfully<br>";
+$categoryModel = App::getInstance(Category::class);
+$planModel = App::getInstance(Plan::class);
 
-    $pdo->beginTransaction();
-    $stmt = $pdo->prepare($sqlAddinCategories);
-    if ($stmt->execute()){
-        echo "Adding the category successfully<br>";
-        $pdo->commit();
-    }else{
-        echo "Adding the category failed<br>";
-    }
+$categoriesToFeed = [
+    ["name"=>"Travling", "description"=>"......"],
+    ["name"=>"Education","description"=>"For ecucation purposes"],
+    ["name"=>"Renting","description"=>"For renting purposes"]
+];
 
-} catch (PDOException $e) {
-    echo $e->getMessage();
+
+foreach ($categoriesToFeed as $category) {
+    echo $categoryModel->create($category)."\n" ;
+    echo $planModel->addColumn($category['name'],"DECIMAL(10,2) NOT NULL default 0.00")."\n" ;
+    echo $planModel->addColumn($category['name']."_balance","DECIMAL(10,2) NOT NULL default 0.00")."\n" ;
 }

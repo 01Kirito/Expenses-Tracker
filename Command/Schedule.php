@@ -6,7 +6,6 @@ class Schedule {
     public function __construct() {
         date_default_timezone_set('Asia/Baghdad');
         static::$currentTimeStamp = getdate();
-
     }
 
     public function run(){
@@ -23,9 +22,9 @@ class Schedule {
                     if($dayOfMonth == "*" || $dayOfMonth == static::$currentTimeStamp['mday'] || static::checkForMode($dayOfMonth,"mday")){
                         if($month == "*" || $month == static::$currentTimeStamp['mon'] || static::checkForMode($month,"mon")){
                             if($dayOfWeek == "*" || $dayOfWeek == static::$currentTimeStamp['wday'] || static::checkForMode($dayOfWeek,"wday")){
-                                echo "Running the command: ".$executeFile." ".$command."<br>";
-                                exec($executeFile." ".$command, $output);
-                                print_r($output);
+                                exec($executeFile." ".$command, $output,$result);
+                                $text = "Run the command: <<".$key.">> file '".$command."' executed by '".$executeFile."' the status result : ".$result ." at:".date("Y-M-D H:i:s",time())." ."."\n";
+                                file_put_contents("Commands.log", $text, FILE_APPEND | LOCK_EX);
                             }
                         }
                     }

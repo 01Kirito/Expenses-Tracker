@@ -5,6 +5,7 @@ use App\App;
 use App\Auth;
 use App\Http\RequestHandler;
 use App\Model\Category;
+use App\Model\CustomPlan;
 use App\Model\Invoice;
 use App\Model\Plan;
 
@@ -19,18 +20,22 @@ class ControllerInvoice extends Controller {
 
     public function index(): void{
         $user = $this->getAuthenticatedUser();
-        static::$Invoice->read(conditions: "WHERE user_id=".$user["id"]);
+        static::$Invoice->readWithResponse(conditions: "WHERE user_id=".$user["id"]);
     }
 
-    public function store(array $Data):void{
+    public function store(array $data):void{
         $user = $this->getAuthenticatedUser();
-        $categoryColumn = App::getInstance(Category::class)->searchForOneRow(selection: "name",conditions: ["category_id"=> $Data['body_json']['category_id']])['name'];
-        $categoryBudget = App::getInstance(Plan::class)->searchForOneRow(selection: "{$categoryColumn},{$categoryColumn}_balance",conditions: ["user_id"=>$user["id"]]);
-
+        $categoryColumn = App::getInstance(Category::class)->searchForOneRow(selection: ["name"],conditions: ["category_id"=> $data['body_json']['category_id']])['name'];
+        $categoryBudget = App::getInstance(Plan::class)->searchForOneRow(selection: [$categoryColumn,$categoryColumn."_balance"],conditions: ["user_id"=>1]);
+        var_dump($categoryBudget);
+        if ($categoryBudget === false){
+            $categoryBudget = App::getInstance(CustomPlan::class)->searchForOneRow(selection: [$categoryColumn,$categoryColumn."_balance"],conditions: ["user_id"=>7]);
+        }
+var_dump($categoryBudget);
             if ($user) {
-                if ($this->checkBudget($categoryBudget[$categoryColumn],$categoryBudget[$categoryColumn."_balance"],$Data['body_json']['amount'],$categoryColumn)){
-                $Data['body_json']['user_id'] = $user['id'];
-                static::$Invoice->create($Data['body_json']);
+                if ($this->checkBudget($categoryBudget[$categoryColumn],$categoryBudget[$categoryColumn."_balance"],$data['body_json']['amount'],$categoryColumn)){
+                $data['body_json']['user_id'] = $user['id'];
+                static::$Invoice->createWithResponse($data['body_json']);
                 }else{
                     RequestHandler::sendResponse(404,[],["message"=>"Update plan limit so you can add invoice"]);
                 }
@@ -39,9 +44,9 @@ class ControllerInvoice extends Controller {
             }
     }
 
-    public function show(array $Data):void{
+    public function show(array $data):void{
         $user    = $this->getAuthenticatedUser();
-        $invoice = static::$Invoice->searchForOneRow(conditions: $Data['url_parameters']);
+        $invoice = static::$Invoice->searchForOneRow(conditions: $data['url_parameters']);
         if ($invoice['user_id'] === $user['id']){
             RequestHandler::sendResponse(200,[],$invoice);
         }else{
@@ -49,21 +54,21 @@ class ControllerInvoice extends Controller {
         }
     }
 
-    public function update($Data):void{
+    public function update($data):void{
         $user = $this->getAuthenticatedUser();
-        $invoice = static::$Invoice->searchForOneRow(conditions: $Data['url_parameters']);
+        $invoice = static::$Invoice->searchForOneRow(conditions: $data['url_parameters']);
         if ($invoice['user_id'] === $user['id']){
-            static::$Invoice->updateWithResponse($Data['body_json'],$Data['url_parameters'],false);
+            static::$Invoice->updateWithResponse($data['body_json'],$data['url_parameters'],false);
         }else{
             RequestHandler::sendResponse(404,[],["message"=>"Unauthorized"]);
         }
     }
 
-    public function delete(array $Data):void{
+    public function delete(array $data):void{
         $user = $this->getAuthenticatedUser();
-        $invoice = static::$Invoice->searchForOneRow(conditions: $Data['url_parameters']);
+        $invoice = static::$Invoice->searchForOneRow(conditions: $data['url_parameters']);
         if ($invoice['user_id'] === $user['id']){
-            static::$Invoice->delete($Data['url_parameters']);
+            static::$Invoice->deleteWithResponse($data['url_parameters']);
         }else{
             RequestHandler::sendResponse(404,[],["message"=>"Unauthorized"]);
         }

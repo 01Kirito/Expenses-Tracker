@@ -17,7 +17,7 @@ public function __construct(string $table = "users")
 }
 
 public function authenticate(): bool{
-    $token = apache_request_headers()["Authorization"];
+    $token = getallheaders()["Authorization"];
     if ($this->validations($token)){
         return true;
     }else{
