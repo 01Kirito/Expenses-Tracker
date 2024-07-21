@@ -6,13 +6,16 @@ use Predis\Client;
 require_once '../vendor/autoload.php';
 require_once '../loadContainer.php';
 
-$categories = App::getInstance(Category::class)->getAll("category_id,name");
+$categories = App::getInstance(Category::class)->get();
+if ($categories["error"] === true ) throw new \Exception("Redis cache error");
 $redis = App::getInstance(Client::class);
 $redis->del("categories");
+//foreach ($categories[0] as $category) {
+//    var_dump($category);
+//    $redis->hmset("categories", $category["category_id"], $category["name"]);
+//}
+$redis->set("categories", json_encode($categories[0]));
 
-foreach ($categories as $category) {
-    $redis->hset("categories", $category["category_id"], $category["name"]);
-}
 $redis->expire("categories", 86400);
 
 

@@ -27,6 +27,8 @@ $router->addRoute("/ExpensesTracker/user/softDelete",[ControllerUser::class,'sof
 $router->addRoute("/ExpensesTracker/user/delete",[ControllerUser::class,'delete'],'delete','api'); 
 $router->addRoute("/ExpensesTracker/user/show",[ControllerUser::class,'show'],'get','api');
 
+$router->addRoute("/ExpensesTracker/user/searchByEmail",[ControllerUser::class,'getUser'],'get','guest');
+
 // Device Token routes
 $router->addRoute("/ExpensesTracker/user/store/deviceToken",[ControllerDeviceToken::class,'storeDeviceToken'],'POST','api');
 
@@ -36,7 +38,7 @@ $router->addRoute("/ExpensesTracker/user/invoice/store",[ControllerInvoice::clas
 $router->addRoute("/ExpensesTracker/user/invoice/update",[ControllerInvoice::class,'update'],'put','api');  
 $router->addRoute("/ExpensesTracker/user/invoice/softDelete",[ControllerInvoice::class,'softDelete'],'delete','api'); 
 $router->addRoute("/ExpensesTracker/user/invoice/delete",[ControllerInvoice::class,'delete'],'delete','api');
-$router->addRoute("/ExpensesTracker/user/invoice/show",[ControllerInvoice::class,'show'],'get','api');        
+$router->addRoute("/ExpensesTracker/user/invoice/show",[ControllerInvoice::class,'show'],'get','api');
 
 
 // category routes
@@ -59,7 +61,8 @@ $router->addRoute("/ExpensesTracker/user/plan/update",[ControllerPlan::class,'up
 
 // preference routes
 $router->addRoute("/ExpensesTracker/user/preference",[ControllerPreference::class,'show'],'get','api');        
-$router->addRoute("/ExpensesTracker/user/preference/update",[ControllerPreference::class,'update'],'put','api');  
+$router->addRoute("/ExpensesTracker/user/preference/update",[ControllerPreference::class,'update'],'put','api');
+$router->addRoute("/ExpensesTracker/user/preference/store",[ControllerPreference::class,'store'],'post','admin');
 
 
 

@@ -23,7 +23,11 @@ class Schedule {
                         if($month == "*" || $month == static::$currentTimeStamp['mon'] || static::checkForMode($month,"mon")){
                             if($dayOfWeek == "*" || $dayOfWeek == static::$currentTimeStamp['wday'] || static::checkForMode($dayOfWeek,"wday")){
                                 exec($executeFile." ".$command, $output,$result);
-                                $text = "Run the command: <<".$key.">> file '".$command."' executed by '".$executeFile."' the status result : ".$result ." at:".date("Y-M-D H:i:s",time())." ."."\n";
+                                if ($result === 0){
+                                    $text = "Command: <<".$key.">> successfully run the file '".$command."' by '". $executeFile." at: ".date("Y-M-D H:i:s",time())." .(status result:".$result.")\n";
+                                }else{
+                                    $text = "Command: <<".$key.">> failed at running the file '".$command."' by '". $executeFile." at:".date("Y-M-D H:i:s",time())." .(status result:".$result.")\n";
+                                }
                                 file_put_contents("Commands.log", $text, FILE_APPEND | LOCK_EX);
                             }
                         }

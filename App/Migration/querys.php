@@ -88,7 +88,7 @@ $sqlCustomPlans = "CREATE TABLE custom_plans (
     user_id INT NOT NULL ,
     category_id INT NOT NULL ,
     category_plan DECIMAL(10,2) NOT NULL default 0.00,
-    category_balance DECIMAL(10,2) NOT NULL default 0.00,
+    category_used DECIMAL(10,2) NOT NULL default 0.00,
     constraint UNIQUE_category_name UNIQUE (user_id, category_id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ,
     FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE

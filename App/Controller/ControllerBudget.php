@@ -12,31 +12,35 @@ class ControllerBudget extends Controller
 
     public function __construct()
     {
+        Parent::__construct();
         static::$Budget = App::getInstance(Budget::class);
     }
 
     public function index(): void
     {
-        static::$Budget->readWithResponse();
+       $result = static::$Budget->get();
+       $this->response($result);
     }
 
-    public function store(array $Data):void{
-        $pairs = $Data['body_json'];
-        static::$Budget->createWithResponse($pairs) ;
-    }
-
-    public function show(array $Data):void{
-
-        static::$Budget->fetchOne(conditions: $Data['url_parameters']);
+    public function store(array $data):void{
 
     }
 
-    public function update($Data):void{
-        static::$Budget->updateWithResponse($Data['body_json'],$Data['url_parameters'],false);
+    public function show(array $data):void{
+        $user = $this->getAuthenticatedUser();
+        $result = static::$Budget->get(condition: ["user_id"=>$user["id"]],fetchOneRow: true);
+        $this->response($result);
     }
 
-    public function delete(array $Data):void{
-        static::$Budget->deleteWithResponse($Data['url_parameters']);
+    public function update($data):void{
+        $user = $this->getAuthenticatedUser() ;
+        $result = static::$Budget->update($data['body_json'],["user_id"=>$user["id"]],false);
+        $this->response($result);
+    }
+
+    public function delete(array $data):void{
+       $result = static::$Budget->delete($data['url_parameters']);
+       $this->response($result);
     }
 
 

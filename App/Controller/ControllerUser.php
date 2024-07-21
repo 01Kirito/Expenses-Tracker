@@ -10,98 +10,127 @@ use App\Model\Category;
 use App\Model\Plan;
 use App\Model\Preference;
 use App\Model\User;
-use Google\Service\VMwareEngine\Credentials;
 use ReallySimpleJWT\Token;
 use Predis\Client as RedisClient;
 
 class ControllerUser extends Controller
 {
 
-    public static $User ;
+    public static $userModel ;
     public static $requestHandler ;
 
     public function __construct()
     {
-        static::$User = App::getInstance(User::class);
+        Parent::__construct();
+        static::$userModel = App::getInstance(User::class);
         static::$requestHandler = App::getInstance(RequestHandler::class);
     }
 
     public function login($data):void{
         $credentials["password"] = $data["body_json"]["password"];
         $credentials["email"] = $data["body_json"]["email"];
-        $result= static::$User->searchForOneRow(selection:["id","password"] ,conditions: ["email"=>$credentials["email"]]);
-        $auth = password_verify($credentials["password"],$result["password"]);
-      if ($auth){
-          $payload = [ 'iat' => time(), 'uid' => $result["id"], 'exp' => time() + 86400, 'iss' => 'localhost'];
+        $result= static::$userModel->get(selection:["id","password"] ,condition: ["email"=>$credentials["email"]] ,fetchOneRow: true);
+        if ($result["error"] !== false) {
+          throw new \Exception("Login failed");
+        } elseif (password_verify($credentials["password"],$result[0]["password"])){
+          $payload = [ 'iat' => time(), 'uid' => $result[0]["id"], 'exp' => time() + 86400, 'iss' => 'localhost'];
           $token = Token::customPayload($payload, $_ENV["JWT_SECRET"]);
           static::$requestHandler->sendResponse(200,["Authorization"=>$token],["message"=>"Login Successful"]);
       }else{
           static::$requestHandler->sendResponse(401,[],["message"=>"Login failed, check your email and password"]);
       }
     }
-
+    public function getUser($data): void{
+        $result = static::$userModel->get(
+            selection: ["id","concat(first_name,' ',last_name) FullName ","invoice_id","name Category","amount","i.description invoice_detail","purchase_date"],
+            condition: $data["url_parameters"] ,
+            logicalOperator: ["AND"],
+            join: ["invoices i "=>" users.id = i.user_id ","categories c"=>"c.category_id = i.category_id "]
+        );
+        if ($result["error"] !== false) {
+            $this->response($result);
+        }else{
+            $this->response($result);
+        }
+    }
 
     public function dashboard():void{
           $user         = $this->getAuthenticatedUser();
-          $decidedMoney = App::getInstance(Plan::class)->searchForOneRow(conditions: ["user_id"=>$user['id']]);
-          $categories   = App::getInstance(Category::class)->getAll(["category_id","name"]);
-          foreach ($categories as $category){
-              $usedAmount = $decidedMoney[$category["name"]."_balance"] ?? 0;
-              $planned = $decidedMoney[$category["name"]];
+          $decidedMoney = App::getInstance(Plan::class)->get(condition: ["user_id = "=>$user["id"]],fetchOneRow: true);
+          $categories   = App::getInstance(Category::class)->get(selection:["category_id","name"]);
+          if ($categories["error"] !== false || $decidedMoney["error"] !== false) {
+              $this->response($categories);
+          }else{
+          foreach ($categories[0] as $category){
+              $usedAmount = $decidedMoney[0][$category["name"]."_used"] ?? 0;
+              $planned = $decidedMoney[0][$category["name"]];
               $percentage = ($planned != 0) ? ($usedAmount / $planned * 100) : 0;
-              $analysis[$category['category_id']] = ["name"=>$category['name'],"amount"=>$usedAmount,"plan"=>$planned,"percentage"=>$percentage];
+              $analysis[$category['category_id']] = ["name"=>$category['name'],"amount"=>$usedAmount,"plan"=>$planned,"percentage"=>round($percentage,2)];
           }
-          RequestHandler::sendResponse(200,[],$analysis);
+          $this->response($analysis);
+          }
     }
-
-
     public function dashboardCache():void{
-        $user         = $this->getAuthenticatedUser();
-        $decidedMoney = App::getInstance(Plan::class)->searchForOneRow(conditions: ["user_id"=>$user['id']]);
-        $redis        = App::getInstance(RedisClient::class);
-        $categories   = $redis->hgetAll("categories");
-        foreach ($categories as $key=>$categoryName){
-            $usedAmount = $decidedMoney[$categoryName."_balance"] ?? 0;
-            $planned = $decidedMoney[$categoryName];
-            $percentage = ($planned != 0) ? ($usedAmount / $planned * 100) : 0;
-            $analysis[$key] = ["name"=>$categoryName,"amount"=>$usedAmount,"plan"=>$planned,"percentage"=>$percentage];
+        $user = $this->getAuthenticatedUser();
+        $plans = App::getInstance(Plan::class)->get(condition: ["user_id" => $user['id']], fetchOneRow: true);
+        try {
+            $redis = App::getInstance(RedisClient::class);
+            $categories = $redis->hgetAll("categories");
+            if ($plans["error"] !== false || empty($categories)) {
+                $this->response(["error" => true, "message" => ($plans["error"] ?? " ") . "  " . (empty($categories) ? "The categories isn't found in the cache" : "")]);
+            }else {
+                foreach ($categories as $key => $categoryName) {
+                    $usedAmount = $plans[0][$categoryName . "_used"] ?? 0;
+                    $planned = $plans[0][$categoryName];
+                    $percentage = ($planned != 0) ? ($usedAmount / $planned * 100) : 0;
+                    $analysis[$key] = ["name" => $categoryName, "amount" => $usedAmount, "plan" => $planned, "percentage" => round($percentage)];
+                }
+                $this->response($analysis);
+            }
+        } catch (\Exception $e){
+            $this->response(["error" => true, "message" => $e->getMessage()]);
         }
-        RequestHandler::sendResponse(200,[],$analysis);
     }
-
 
     public function index(): void{
-        static::$User->readWithResponse();
+       $result = static::$userModel->get();
+       $this->response($result);
     }
 
     public function store(array $data):void{
         //todo  make it use transactions and create fucntion that not create with response
-        static::$User->createWithResponse($data['body_json']) ;
+        $result = static::$userModel->create($data['body_json']) ;
+        if ($result["error"]===false){
         $lastInsertId = App::getInstance(Database::class)->getConnection()->lastInsertId();
-        App::getInstance(Preference::class)->createWithResponse(["user_id"=>$lastInsertId,"theme"=>"dark"]);
-        App::getInstance(Plan::class)->createWithResponse(["user_id"=>$lastInsertId]);
-        App::getInstance(Budget::class)->createWithResponse(["user_id"=>$lastInsertId]);
+        App::getInstance(Preference::class)->create(["user_id"=>$lastInsertId,"theme"=>"dark"]);
+        App::getInstance(Plan::class)->create(["user_id"=>$lastInsertId]);
+        App::getInstance(Budget::class)->create(["user_id"=>$lastInsertId]);
+        }
+        $this->response($result);
     }
-
     public function show():void{
         $user = $this->getAuthenticatedUser();
-        static::$User->fetchOne(conditions: ["id"=>$user["id"]]);
+        $result = static::$userModel->get(condition: ["id"=>$user["id"]],fetchOneRow: true);
+        $this->response($result);
     }
 
     public function update($data):void{
         $authenticatedUser = $this->getAuthenticatedUser();
-        static::$User->updateWithResponse($data['body_json'],["id"=>$authenticatedUser['id']],false);
+        $result = static::$userModel->update(column:$data['body_json'], condition: ["id"=>$authenticatedUser['id']] ,autoDateUpdate:false);
+        $this->response($result);
     }
 
     public function delete():void{
         $authenticatedUser = $this->getAuthenticatedUser();
-        static::$User->deleteWithResponse(["id"=>$authenticatedUser['id']]);
+        $result = static::$userModel->delete(["id"=>$authenticatedUser['id']]);
+        $this->response($result);
 
     }
 
     public function softDelete():void{
         $authenticatedUser = $this->getAuthenticatedUser();
-        static::$User->softDeleteWithResponse(["id"=>$authenticatedUser['id']], makeItHidden:True ) ;
+        $result =  static::$userModel->softDelete(["id"=>$authenticatedUser['id']], makeItHidden:True ) ;
+        $this->response($result);
     }
 
 }
