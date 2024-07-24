@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13ebe071-4b8f-4ea9-a125-a5fdc7962d8d" name="Changes" comment="" />
+    <list default="true" id="13ebe071-4b8f-4ea9-a125-a5fdc7962d8d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,7 +80,7 @@
     "PHP Script.test.php.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "feature__dockerize",
-    "last_opened_file_path": "C:/xampp/htdocs/ExpensesTracker/Web app",
+    "last_opened_file_path": "C:/xampp2/htdocs/ExpensesTracker/.env",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -87,6 +90,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\ExpensesTracker" />
       <recent name="C:\xampp\htdocs\ExpensesTracker\Web app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -123,6 +127,8 @@
       <workItem from="1721022500329" duration="56605000" />
       <workItem from="1721268118127" duration="107780000" />
       <workItem from="1721739751257" duration="26771000" />
+      <workItem from="1721833456389" duration="2750000" />
+      <workItem from="1721843872552" duration="44000" />
     </task>
     <servers />
   </component>
