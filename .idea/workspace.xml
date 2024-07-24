@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="13ebe071-4b8f-4ea9-a125-a5fdc7962d8d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/env.example" beforeDir="false" afterPath="$PROJECT_DIR$/env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/env.example" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,31 +63,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;PHP Script.ControllerUser.php.executor&quot;: &quot;Run&quot;,
-    &quot;PHP Script.Model.php.executor&quot;: &quot;Run&quot;,
-    &quot;PHP Script.Schema_design.php.executor&quot;: &quot;Run&quot;,
-    &quot;PHP Script.cronTab.php.executor&quot;: &quot;Run&quot;,
-    &quot;PHP Script.custom.php.executor&quot;: &quot;Run&quot;,
-    &quot;PHP Script.daily_notification.php.executor&quot;: &quot;Run&quot;,
-    &quot;PHP Script.migrating_file(runThisFile).php.executor&quot;: &quot;Run&quot;,
-    &quot;PHP Script.migrating_file.php.executor&quot;: &quot;Run&quot;,
-    &quot;PHP Script.monthly_report.php.executor&quot;: &quot;Run&quot;,
-    &quot;PHP Script.redisCache.php.executor&quot;: &quot;Run&quot;,
-    &quot;PHP Script.seed.php.executor&quot;: &quot;Run&quot;,
-    &quot;PHP Script.seed_invoice.php.executor&quot;: &quot;Run&quot;,
-    &quot;PHP Script.test.php.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature__dockerize&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/xampp/htdocs/ExpensesTracker/Web app&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "PHP Script.ControllerUser.php.executor": "Run",
+    "PHP Script.Model.php.executor": "Run",
+    "PHP Script.Schema_design.php.executor": "Run",
+    "PHP Script.cronTab.php.executor": "Run",
+    "PHP Script.custom.php.executor": "Run",
+    "PHP Script.daily_notification.php.executor": "Run",
+    "PHP Script.migrating_file(runThisFile).php.executor": "Run",
+    "PHP Script.migrating_file.php.executor": "Run",
+    "PHP Script.monthly_report.php.executor": "Run",
+    "PHP Script.redisCache.php.executor": "Run",
+    "PHP Script.seed.php.executor": "Run",
+    "PHP Script.seed_invoice.php.executor": "Run",
+    "PHP Script.test.php.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/xampp/htdocs/ExpensesTracker/Web app",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\ExpensesTracker\Web app" />

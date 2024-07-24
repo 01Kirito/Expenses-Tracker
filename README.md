@@ -1,5 +1,6 @@
 # Setup project using the docker 
-### Get firebase auth service file to the private directory 
+### Get firebase auth service file to the private directory then go to the project folder by the command below
+cd Expenses-Tracker
 ### Rename .env.example file to .env by the below command 
 ren .env.example .env   
 ### Then configure, cause you use docker you donot need to configure all of it you just need to put the file name of the variable GOOGLE_APPLICATION_CREDENTIALS
