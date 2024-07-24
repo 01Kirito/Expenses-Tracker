@@ -30,10 +30,10 @@ class ControllerUser extends Controller
         $credentials["password"] = $data["body_json"]["password"];
         $credentials["email"] = $data["body_json"]["email"];
         $result= static::$userModel->get(selection:["id","password"] ,condition: ["email"=>$credentials["email"]] ,fetchOneRow: true);
-        if ($result["error"] !== false) {
-          throw new \Exception("Login failed");
-        } elseif (password_verify($credentials["password"],$result[0]["password"])){
-          $payload = [ 'iat' => time(), 'uid' => $result[0]["id"], 'exp' => time() + 86400, 'iss' => 'localhost'];
+        if (array_key_exists("error",$result) || array_key_exists("message",$result)){
+          $this->response($result);
+        } elseif (password_verify($credentials["password"],$result["password"])){
+          $payload = [ 'iat' => time(), 'uid' => $result["id"], 'exp' => time() + 86400, 'iss' => 'localhost'];
           $token = Token::customPayload($payload, $_ENV["JWT_SECRET"]);
           static::$requestHandler->sendResponse(200,["Authorization"=>$token],["message"=>"Login Successful"]);
       }else{
@@ -47,50 +47,27 @@ class ControllerUser extends Controller
             logicalOperator: ["AND"],
             join: ["invoices i "=>" users.id = i.user_id ","categories c"=>"c.category_id = i.category_id "]
         );
-        if ($result["error"] !== false) {
-            $this->response($result);
-        }else{
-            $this->response($result);
-        }
+        $this->response($result);
     }
 
     public function dashboard():void{
           $user         = $this->getAuthenticatedUser();
           $decidedMoney = App::getInstance(Plan::class)->get(condition: ["user_id = "=>$user["id"]],fetchOneRow: true);
           $categories   = App::getInstance(Category::class)->get(selection:["category_id","name"]);
-          if ($categories["error"] !== false || $decidedMoney["error"] !== false) {
-              $this->response($categories);
+          if (array_key_exists("error",$categories) || array_key_exists("message",$categories) || array_key_exists("error",$decidedMoney) || array_key_exists("message",$decidedMoney)) {
+             @ $this->response(["error"=>$categories["error"].$decidedMoney["error"],"message"=>$categories["message"].$decidedMoney["message"]]);
           }else{
-          foreach ($categories[0] as $category){
-              $usedAmount = $decidedMoney[0][$category["name"]."_used"] ?? 0;
-              $planned = $decidedMoney[0][$category["name"]];
+          foreach ($categories as $category){
+              $usedAmount = $decidedMoney[$category["name"]."_used"] ?? 0;
+              $planned = $decidedMoney[$category["name"]];
               $percentage = ($planned != 0) ? ($usedAmount / $planned * 100) : 0;
-              $analysis[$category['category_id']] = ["name"=>$category['name'],"amount"=>$usedAmount,"plan"=>$planned,"percentage"=>round($percentage,2)];
+              $analysis []= ["category_id"=>$category['category_id'],"name"=>$category['name'],"usedAmount"=>$usedAmount,"plan"=>$planned,"percentage"=>round($percentage,2)];
           }
           $this->response($analysis);
           }
     }
-    public function dashboardCache():void{
-        $user = $this->getAuthenticatedUser();
-        $plans = App::getInstance(Plan::class)->get(condition: ["user_id" => $user['id']], fetchOneRow: true);
-        try {
-            $redis = App::getInstance(RedisClient::class);
-            $categories = $redis->hgetAll("categories");
-            if ($plans["error"] !== false || empty($categories)) {
-                $this->response(["error" => true, "message" => ($plans["error"] ?? " ") . "  " . (empty($categories) ? "The categories isn't found in the cache" : "")]);
-            }else {
-                foreach ($categories as $key => $categoryName) {
-                    $usedAmount = $plans[0][$categoryName . "_used"] ?? 0;
-                    $planned = $plans[0][$categoryName];
-                    $percentage = ($planned != 0) ? ($usedAmount / $planned * 100) : 0;
-                    $analysis[$key] = ["name" => $categoryName, "amount" => $usedAmount, "plan" => $planned, "percentage" => round($percentage)];
-                }
-                $this->response($analysis);
-            }
-        } catch (\Exception $e){
-            $this->response(["error" => true, "message" => $e->getMessage()]);
-        }
-    }
+
+
 
     public function index(): void{
        $result = static::$userModel->get();
@@ -98,9 +75,9 @@ class ControllerUser extends Controller
     }
 
     public function store(array $data):void{
-        //todo  make it use transactions and create fucntion that not create with response
+        // todo  make it use transactions and create function that not create with response
         $result = static::$userModel->create($data['body_json']) ;
-        if ($result["error"]===false){
+        if (!array_key_exists("error",$result)){
         $lastInsertId = App::getInstance(Database::class)->getConnection()->lastInsertId();
         App::getInstance(Preference::class)->create(["user_id"=>$lastInsertId,"theme"=>"dark"]);
         App::getInstance(Plan::class)->create(["user_id"=>$lastInsertId]);

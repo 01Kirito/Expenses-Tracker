@@ -18,7 +18,7 @@ $router->addRoute("/ExpensesTracker/login",[ControllerUser::class,'login'],'post
 
 
 // user routes
-$router->addRoute("/ExpensesTracker/user",[ControllerUser::class,'index'],'GET','api');
+$router->addRoute("/ExpensesTracker/user",[ControllerUser::class,'index'],'GET','guest');
 $router->addRoute("/ExpensesTracker/user/dashboard",[ControllerUser::class,'dashboard'],'GET','api');
 $router->addRoute("/ExpensesTracker/user/dashboard_cache",[ControllerUser::class,'dashboardCache'],'GET','api');
 $router->addRoute("/ExpensesTracker/user/store",[ControllerUser::class,'store'],'POST','guest');
@@ -51,7 +51,8 @@ $router->addRoute("/ExpensesTracker/category/show",[ControllerCategory::class,'s
 $router->addRoute("/ExpensesTracker/customCategory/store",[ControllerCustomCategory::class,'store'],'POST','api');
 
 // budget routes
-$router->addRoute("/ExpensesTracker/user/budget",[ControllerBudget::class,'show'],'GET','api');  
+$router->addRoute("/ExpensesTracker/user/budget",[ControllerBudget::class,'index'],'GET','api');
+$router->addRoute("/ExpensesTracker/user/budget/show",[ControllerBudget::class,'show'],'GET','api');
 $router->addRoute("/ExpensesTracker/user/budget/update",[ControllerBudget::class,'update'],'put','api');  
 
 // plan routes

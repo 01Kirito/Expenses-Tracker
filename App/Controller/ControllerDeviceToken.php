@@ -25,8 +25,8 @@ class ControllerDeviceToken extends Controller
        @ $data["user_id"] = $user["id"];
         if (strlen($data["device_type"]) > 0 && strlen($data["token"]) > 0) {
             $tokenExist = static::$deviceTokenModel->get(selection: ["token_id"],condition: ["device_type"=>$data["device_type"],"user_id"=>$data["user_id"]],logicalOperator: ["AND"],fetchOneRow: true);
-            if (isset($tokenExist[0]["token_id"])){
-                $result= static::$deviceTokenModel->update(column: ["token"=>$data["token"]], condition: ["token_id"=>$tokenExist[0]["token_id"]]);
+            if (!array_key_exists("error", $tokenExist) && !array_key_exists("message", $tokenExist)) {
+                $result= static::$deviceTokenModel->update(column: ["token"=>$data["token"]], condition: ["token_id"=>$tokenExist["token_id"]]);
             }else{
                 $result = static::$deviceTokenModel->create($data);
                 }

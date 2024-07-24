@@ -22,8 +22,8 @@ $categoriesToFeed = [
 
 foreach ($categoriesToFeed as $category) {
     $result = $categoryModel->create($category) ;
-    if ($result["error"] !== false){
-        echo $result["message"]."\n";
+    if (array_key_exists("error", $result)) {
+        echo $result["error"].$result["message"]."\n";
     }else{
        $result2 = $planModel->addColumn($category['name'],"DECIMAL(10,2) NOT NULL default 0.00") ;
        $result3 = $planModel->addColumn($category['name']."_used","DECIMAL(10,2) NOT NULL default 0.00");

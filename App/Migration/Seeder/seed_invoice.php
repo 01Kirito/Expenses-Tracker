@@ -5,7 +5,7 @@ use App\Model\Invoice;
 
 $invoiceModel = App::getInstance(Invoice::class);
 $data =[
-    "user_id" => 1,
+    "user_id" => 101,
     "category_id"=> "2",
     "amount"=> "1.56",
     "description"=> "house renting",

@@ -4,8 +4,8 @@ use App\App;
 use App\Model\Category;
 use Predis\Client;
 
-require_once '../vendor/autoload.php';
-require_once '../loadContainer.php';
+require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../loadContainer.php';
 
 // this codes below is just for test, not real month report
 $categories = App::getInstance(Category::class)->get(selection:["category_id","name"]);

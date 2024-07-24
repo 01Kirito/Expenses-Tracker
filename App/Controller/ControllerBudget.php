@@ -16,10 +16,10 @@ class ControllerBudget extends Controller
         static::$Budget = App::getInstance(Budget::class);
     }
 
-    public function index(): void
-    {
-       $result = static::$Budget->get();
-       $this->response($result);
+    public function index(): void{
+        $user = $this->getAuthenticatedUser();
+        $result = static::$Budget->get(condition: ["user_id"=>$user["id"]],fetchOneRow: true);
+        $this->response($result);
     }
 
     public function store(array $data):void{
@@ -28,7 +28,7 @@ class ControllerBudget extends Controller
 
     public function show(array $data):void{
         $user = $this->getAuthenticatedUser();
-        $result = static::$Budget->get(condition: ["user_id"=>$user["id"]],fetchOneRow: true);
+        $result = static::$Budget->get(selection: array_values($data["url_parameters"]),condition: ["user_id"=>$user["id"]],fetchOneRow: true);
         $this->response($result);
     }
 

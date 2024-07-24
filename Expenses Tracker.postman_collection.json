@@ -36,9 +36,9 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/user",
+							"raw": "{{base_url2}}/user",
 							"host": [
-								"{{base_url}}"
+								"{{base_url2}}"
 							],
 							"path": [
 								"user"
@@ -90,6 +90,53 @@
 					"response": []
 				},
 				{
+					"name": "Get User By Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/searchByEmail?email=musabjaf15@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"searchByEmail"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "musabjaf15@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Register User",
 					"event": [
 						{
@@ -111,7 +158,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"first_name\": \"Musab\",\n    \"last_name\": \"Ismael\",\n    \"email\": \"musabjaff@gmail.com\",\n    \"password\": \"musab123\"\n}",
+							"raw": "{\n\t\"first_name\": \"Musab\",\n    \"last_name\": \"Ismael\",\n    \"email\": \"musabjaf15@gmail.com\",\n    \"password\": \"musab123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -126,6 +173,74 @@
 							"path": [
 								"user",
 								"store"
+							],
+							"query": [
+								{
+									"key": "hhafd",
+									"value": "dadf",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Register User Device Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Device-Token",
+								"value": "{{device_token}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "firefox v3",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "User-Agent",
+								"value": "mobile ",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/store/deviceToken",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"store",
+								"deviceToken"
 							],
 							"query": [
 								{
@@ -167,7 +282,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"first_name\": \"Musab\",\n    \"last_name\": \"Esmael\"\n\n}",
+							"raw": "{\n\t\"first_name\": \"Marden\",\n    \"last_name\": \"Ismael\"\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -273,7 +388,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"musabjaff@gmail.com\",\r\n    \"password\":\"musab123\"\r\n}",
+							"raw": "{\r\n    \"email\":\"musabjaf15@gmail.com\",\r\n    \"password\":\"musab123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -413,7 +528,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/user/invoice/show?invoice_id=11",
+							"raw": "{{base_url}}/user/invoice/show?invoice_id=23",
 							"host": [
 								"{{base_url}}"
 							],
@@ -425,7 +540,7 @@
 							"query": [
 								{
 									"key": "invoice_id",
-									"value": "11"
+									"value": "23"
 								}
 							]
 						}
@@ -460,7 +575,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"category_id\": \"3\",\n    \"amount\": \"1.56\",\n    \"description\": \"house renting\",\n    \"purchase_date\": \"2024-10-23 11:00:00\"\n}",
+							"raw": "// {\n//     \"category_id\": \"2\",\n//     \"amount\": \"120.56\",\n//     \"description\": \"buy laptop\",\n//     \"purchase_date\": \"2024-10-23 11:00:00\"\n// }\n\n{\n    \"category_id\": \"20\",\n    \"amount\": \"10.56\",\n    \"description\": \"buy bag\",\n    \"purchase_date\": \"2024-10-23 11:00:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -517,7 +632,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"category_id\": \"2\"\n\n}",
+							"raw": "{\n\t// \"category_id\": \"2\"\n    // \"description\":\"house\"\n    \"amount\":\"120\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -525,7 +640,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/user/invoice/update?invoice_id=11",
+							"raw": "{{base_url}}/user/invoice/update?invoice_id=4",
 							"host": [
 								"{{base_url}}"
 							],
@@ -537,7 +652,7 @@
 							"query": [
 								{
 									"key": "invoice_id",
-									"value": "11"
+									"value": "4"
 								}
 							]
 						}
@@ -563,9 +678,15 @@
 					],
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{base_url}}/user/invoice/delete?id=65",
+							"raw": "{{base_url}}/user/invoice/delete?invoice_id=9",
 							"host": [
 								"{{base_url}}"
 							],
@@ -576,8 +697,8 @@
 							],
 							"query": [
 								{
-									"key": "id",
-									"value": "65"
+									"key": "invoice_id",
+									"value": "9"
 								}
 							]
 						},
@@ -648,7 +769,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/category/show?category_id=3",
+							"raw": "{{base_url}}/category/show?category_id=7",
 							"host": [
 								"{{base_url}}"
 							],
@@ -659,7 +780,7 @@
 							"query": [
 								{
 									"key": "category_id",
-									"value": "3"
+									"value": "7"
 								}
 							]
 						}
@@ -694,7 +815,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"name\":\"Travling\",\n\"description\":\"......\"\n}",
+							"raw": "// {\n// \"name\":\"Travling\",\n// \"description\":\"......\"\n// }\n\n{\n\"name\":\"ddfe\",\n\"description\":\"For Gaming purposes\"\n}\n\n// {\n// \"name\":\"Renting\",\n// \"description\":\"For renting purposes\"\n// }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -708,6 +829,62 @@
 							],
 							"path": [
 								"category",
+								"store"
+							],
+							"query": [
+								{
+									"key": "hhafd",
+									"value": "dadf",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Custom Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"name\":\"Travling\",\n\"description\":\"......\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customCategory/store",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customCategory",
 								"store"
 							],
 							"query": [
@@ -741,10 +918,16 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"name\":\"Education\",\n\"description\":\"for studing purpose\"\n}",
+							"raw": "{\n\"name\":\"Deer\",\n\"description\":\"for the purposes like traveling\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -752,7 +935,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/category/update?category_id=1",
+							"raw": "{{base_url}}/category/update?category_id=15",
 							"host": [
 								"{{base_url}}"
 							],
@@ -763,7 +946,7 @@
 							"query": [
 								{
 									"key": "category_id",
-									"value": "1"
+									"value": "15"
 								}
 							]
 						}
@@ -882,7 +1065,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"Renting\": \"50\",\n    \"Health\": \"220\",\n     \"Education\":\"90\"\n}",
+							"raw": "{\n\t// \"Renting\": \"50\",\n    // \"Health\": \"220\",\n     \"Education\":\"190\",\n     \"Service\":100\n    // \"Traveling\":\"200\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -890,7 +1073,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/user/plan/update?user_id=8",
+							"raw": "{{base_url}}/user/plan/update",
 							"host": [
 								"{{base_url}}"
 							],
@@ -898,12 +1081,6 @@
 								"user",
 								"plan",
 								"update"
-							],
-							"query": [
-								{
-									"key": "user_id",
-									"value": "8"
-								}
 							]
 						}
 					},
@@ -914,6 +1091,44 @@
 		{
 			"name": "Budget Table",
 			"item": [
+				{
+					"name": "Get Budgets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/budget",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"budget"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Get Budget",
 					"event": [
@@ -932,24 +1147,34 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{base_url}}/user/budget?user_id=1",
+							"raw": "{{base_url}}/user/budget/show?name=total&name2=salary",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"user",
-								"budget"
+								"budget",
+								"show"
 							],
 							"query": [
 								{
-									"key": "user_id",
-									"value": "1"
+									"key": "name",
+									"value": "total"
+								},
+								{
+									"key": "name2",
+									"value": "salary"
 								}
 							]
-						},
-						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+						}
 					},
 					"response": []
 				},
@@ -974,14 +1199,14 @@
 						"method": "PUT",
 						"header": [
 							{
-								"key": "aut",
-								"value": "",
+								"key": "Authorization",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"total\": \"910\"\n}",
+							"raw": "{\n\t// \"total\": \"910\"\n    \"salary\":\"400\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1025,9 +1250,15 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{base_url}}/user/preference?user_id=1",
+							"raw": "{{base_url}}/user/preference?selection=theme",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1037,8 +1268,18 @@
 							],
 							"query": [
 								{
-									"key": "user_id",
-									"value": "1"
+									"key": "selection",
+									"value": "language",
+									"disabled": true
+								},
+								{
+									"key": "selection",
+									"value": "*",
+									"disabled": true
+								},
+								{
+									"key": "selection",
+									"value": "theme"
 								}
 							]
 						},
@@ -1065,10 +1306,16 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"theme\": \"light\"\n}",
+							"raw": "{\n\t// \"theme\": \"light\"\n    \"Language\":\"FR\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1076,7 +1323,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/user/preference/update?user_id=8",
+							"raw": "{{base_url}}/user/preference/update",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1084,12 +1331,54 @@
 								"user",
 								"preference",
 								"update"
-							],
-							"query": [
-								{
-									"key": "user_id",
-									"value": "8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adding Preference",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"childs\",\r\n    \"datatype\":\"VARCHAR(30) NOT NULL DEFAULT 'MUTE' \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/preference/store",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"preference",
+								"store"
 							]
 						}
 					},
@@ -1119,10 +1408,6 @@
 		}
 	],
 	"variable": [
-		{
-			"key": "id",
-			"value": "1"
-		},
 		{
 			"key": "base_url",
 			"value": ""

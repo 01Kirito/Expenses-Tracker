@@ -20,13 +20,14 @@ class ControllerCategory extends Controller
 
     public function index(): void
     {
-        $result = $this->getCache("categoriess");
+        $result = static::$categoryModel->get();
+//        $result = $this->getCache("categories");
         $this->response($result);
     }
 
     public function store(array $data):void{
         $result = static::$categoryModel->create($data['body_json']) ;
-        if ($result["error"]===false){
+        if (!array_key_exists("error",$result)){
         App::getInstance(Plan::class)->addColumn($data['body_json']['name'],"DECIMAL(10,2) NOT NULL default 0.00");
         App::getInstance(Plan::class)->addColumn($data['body_json']['name']."_used","DECIMAL(10,2) NOT NULL default 0.00");
         }

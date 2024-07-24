@@ -4,17 +4,17 @@ use App\App;
 use App\Model\DeviceToken;
 use Google\Client;
 
-require_once('../vendor/autoload.php');
-require_once('../loadContainer.php');
+require_once(__DIR__.'/../vendor/autoload.php');
+require_once(__DIR__.'/../loadContainer.php');
 
-$serviceAccountPath = $_ENV["GOOGLE_APPLICATION_CREDENTIALS"];
+$serviceAccountPath = __DIR__."/".$_ENV["GOOGLE_APPLICATION_CREDENTIALS"];
 $projectId          = 'budget-manager-8a82d';
 $accessToken        = getAccessToken($serviceAccountPath);
 $deviceTokens       = App::getInstance(DeviceToken::class)->get(selection:["token"]);
-if ($deviceTokens["error"] !== false){
+if (array_key_exists("error", $deviceTokens) || array_key_exists("message", $deviceTokens)) {
     echo "Error: " . $deviceTokens["error"] . "\n";
 }else{
-foreach ($deviceTokens[0] as $deviceToken) {
+foreach ($deviceTokens as $deviceToken) {
     $response = sendNotification($accessToken, $deviceToken["token"]);
     echo  "<br>".$response;
 }

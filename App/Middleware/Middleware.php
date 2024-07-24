@@ -29,8 +29,8 @@ protected function isValidToken(string $token):bool{
     if (Token::validate($token, $_ENV["JWT_SECRET"])){
         $payload = Token::getPayload($token);
         $user    = App::getInstance(User::class)->get(condition: ["id"=>$payload["uid"]], fetchOneRow: true);
-        if (!array_key_exists(0,$user)) return false;
-        App::setInstance(Auth::class,new Auth($user[0]));
+        if (array_key_exists("error",$user) || array_key_exists("message",$user)) return false;
+        App::setInstance(Auth::class,new Auth($user));
         return true;
     }else{
         return false;
