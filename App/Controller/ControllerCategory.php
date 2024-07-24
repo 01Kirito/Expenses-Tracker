@@ -20,8 +20,10 @@ class ControllerCategory extends Controller
 
     public function index(): void
     {
-        $result = static::$categoryModel->get();
-//        $result = $this->getCache("categories");
+        $result = $this->getCache("categories");
+        if ($result === null){
+            $result = static::$categoryModel->get();
+        }
         $this->response($result);
     }
 

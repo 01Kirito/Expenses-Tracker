@@ -47,6 +47,3 @@ RUN chmod +x /usr/local/bin/myStartupScript.sh
 
 # Expose port 80 (optional, depends on your use case)
 EXPOSE 80
-
-# Specify the entry point command
-#ENTRYPOINT ["/usr/local/bin/myStartupScript.sh"]

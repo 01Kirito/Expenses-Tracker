@@ -31,10 +31,8 @@ class Controller
     }
 
     protected function getCache($key){
-        $start = time() ;
         $data = static::$redis->get($key);
-        $end = time();
-        return [json_decode($data,true),"start"=>$start,"end"=>$end] ?? ["error"=>"there is no data"];
+        return json_decode($data,true);
     }
 
 

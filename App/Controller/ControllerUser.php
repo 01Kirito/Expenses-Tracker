@@ -11,12 +11,11 @@ use App\Model\Plan;
 use App\Model\Preference;
 use App\Model\User;
 use ReallySimpleJWT\Token;
-use Predis\Client as RedisClient;
 
 class ControllerUser extends Controller
 {
 
-    public static $userModel ;
+    public static  $userModel ;
     public static $requestHandler ;
 
     public function __construct()
@@ -40,20 +39,14 @@ class ControllerUser extends Controller
           static::$requestHandler->sendResponse(401,[],["message"=>"Login failed, check your email and password"]);
       }
     }
-    public function getUser($data): void{
-        $result = static::$userModel->get(
-            selection: ["id","concat(first_name,' ',last_name) FullName ","invoice_id","name Category","amount","i.description invoice_detail","purchase_date"],
-            condition: $data["url_parameters"] ,
-            logicalOperator: ["AND"],
-            join: ["invoices i "=>" users.id = i.user_id ","categories c"=>"c.category_id = i.category_id "]
-        );
-        $this->response($result);
-    }
 
     public function dashboard():void{
           $user         = $this->getAuthenticatedUser();
           $decidedMoney = App::getInstance(Plan::class)->get(condition: ["user_id = "=>$user["id"]],fetchOneRow: true);
-          $categories   = App::getInstance(Category::class)->get(selection:["category_id","name"]);
+          $categories   = $this->getCache("categories");
+          if ($categories === null){
+            $categories = App::getInstance(Category::class)->get(selection:["category_id","name"]);
+          }
           if (array_key_exists("error",$categories) || array_key_exists("message",$categories) || array_key_exists("error",$decidedMoney) || array_key_exists("message",$decidedMoney)) {
              @ $this->response(["error"=>$categories["error"].$decidedMoney["error"],"message"=>$categories["message"].$decidedMoney["message"]]);
           }else{
