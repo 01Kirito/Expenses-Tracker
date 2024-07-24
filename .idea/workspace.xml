@@ -5,40 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13ebe071-4b8f-4ea9-a125-a5fdc7962d8d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerBudget.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerBudget.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerCategory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerCustomCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerCustomCategory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerDeviceToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerDeviceToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerInvoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerInvoice.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Middleware/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Middleware/Admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Middleware/Middleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Middleware/Middleware.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Migration/Seeder/seed_category.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/Seeder/seed_category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Migration/Seeder/seed_invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/Seeder/seed_invoice.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Migration/Seeder/seed_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/Seeder/seed_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Migration/custom.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/seed.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Migration/migrating_file(runThisFile).php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/migrating_file.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Model/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Router.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Command/Commands.log" beforeDir="false" afterPath="$PROJECT_DIR$/Command/Commands.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Command/Schedule.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/Schedule.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Command/cronTab.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/cronTab.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Command/daily_notification.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/daily_notification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Command/monthly_report.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/monthly_report.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Command/redisCache.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/redisCache.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Expenses Tracker.postman_collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/Expenses Tracker.postman_collection.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web app/firebase-messaging-sw.js" beforeDir="false" afterPath="$PROJECT_DIR$/Web_app/firebase-messaging-sw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web_app/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web app/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/Web_app/service-worker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/env.example" beforeDir="false" afterPath="$PROJECT_DIR$/env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/loadContainer.php" beforeDir="false" afterPath="$PROJECT_DIR$/loadContainer.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +126,7 @@
       <updated>1721022497782</updated>
       <workItem from="1721022500329" duration="56605000" />
       <workItem from="1721268118127" duration="107780000" />
-      <workItem from="1721739751257" duration="26072000" />
+      <workItem from="1721739751257" duration="26555000" />
     </task>
     <servers />
   </component>
