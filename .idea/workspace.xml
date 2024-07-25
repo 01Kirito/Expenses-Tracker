@@ -5,28 +5,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13ebe071-4b8f-4ea9-a125-a5fdc7962d8d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Schedular/cron.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Migration/Seeder/seed_invoice.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Migration/custom.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Web app/service-worker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Expenses Tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Expenses Tracker.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerBudget.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerBudget.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerCategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerCustomCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerCustomCategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerDeviceToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerDeviceToken.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerInvoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerInvoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerPlan.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerPlan.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerPreference.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerPreference.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Controller/ControllerUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Http/RequestHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Http/RequestHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Middleware/Middleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Middleware/Middleware.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Migration/Seeder/seed_category.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/Seeder/seed_category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Migration/Seeder/seed_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/Seeder/seed_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Migration/migrating_file(runThisFile).php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/migrating_file(runThisFile).php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Migration/querys.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/querys.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Model/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Model.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/loadContainer.php" beforeDir="false" afterPath="$PROJECT_DIR$/loadContainer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Command/Commands.log" beforeDir="false" afterPath="$PROJECT_DIR$/Command/Commands.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Command/Schedule.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/Schedule.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Command/cronTab.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/cronTab.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Command/daily_notification.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/daily_notification.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Command/monthly_report.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/monthly_report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Command/redisCache.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/redisCache.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web app/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
-    <execution />
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution>
+      <executable path="composer" />
+    </execution>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe">
     <include_path>
@@ -40,17 +61,68 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/predis/predis" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/google/apiclient" />
+      <path value="$PROJECT_DIR$/vendor/google/apiclient-services" />
+      <path value="$PROJECT_DIR$/vendor/google/auth" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/constant_time_encoding" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
     </include_path>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2jGntfapw7BptWVAtsQbQbUOGhb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "PHP Script.ControllerUser.php.executor": "Run",
+    "PHP Script.Model.php.executor": "Run",
+    "PHP Script.Schema_design.php.executor": "Run",
+    "PHP Script.custom.php.executor": "Run",
+    "PHP Script.daily_notification.php.executor": "Run",
+    "PHP Script.migrating_file(runThisFile).php.executor": "Run",
+    "PHP Script.migrating_file.php.executor": "Run",
+    "PHP Script.monthly_report.php.executor": "Run",
     "PHP Script.redisCache.php.executor": "Run",
-    "git-widget-placeholder": "feature__adding__cache",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "PHP Script.seed_invoice.php.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature__fcm",
+    "last_opened_file_path": "C:/xampp/htdocs/ExpensesTracker/Web app",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\ExpensesTracker\Web app" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\ExpensesTracker\App\Migration\Schema Design Diagram" />
+      <recent name="C:\xampp\htdocs\ExpensesTracker\private" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration name="redisCache.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/Schedular/redisCache.php">
+    <configuration name="redisCache.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/Command/redisCache.php">
       <method v="2" />
     </configuration>
     <recent_temporary>
@@ -59,7 +131,28 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-PS-241.17011.119" />
+        <option value="bundled-php-predefined-ba97393d7c68-48a1a656d44e-com.jetbrains.php.sharedIndexes-PS-241.17011.119" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="13ebe071-4b8f-4ea9-a125-a5fdc7962d8d" name="Changes" comment="" />
+      <created>1721022497782</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1721022497782</updated>
+      <workItem from="1721022500329" duration="56605000" />
+      <workItem from="1721268118127" duration="64924000" />
+    </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

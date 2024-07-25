@@ -17,7 +17,7 @@ public function __construct(string $table = "users")
 }
 
 public function authenticate(): bool{
-    $token = apache_request_headers()["Authorization"];
+    $token = getallheaders()["Authorization"];
     if ($this->validations($token)){
         return true;
     }else{
@@ -28,8 +28,9 @@ public function authenticate(): bool{
 protected function isValidToken(string $token):bool{
     if (Token::validate($token, $_ENV["JWT_SECRET"])){
         $payload = Token::getPayload($token);
-        $user    = App::getInstance(User::class)->searchForOneRow(conditions: ["id"=>$payload["uid"]]) ;
-        App::setInstance(Auth::class,new Auth($user));
+        $user    = App::getInstance(User::class)->get(condition: ["id"=>$payload["uid"]], fetchOneRow: true);
+        if (!array_key_exists(0,$user)) return false;
+        App::setInstance(Auth::class,new Auth($user[0]));
         return true;
     }else{
         return false;

@@ -5,8 +5,8 @@ namespace App\Http;
 class RequestHandler {
    static protected array $commonResponseHeaders = [
         'Content-Type' => 'application/json',
-//        'Accept' => 'application/json',
-//        'Transfer-Encoding' => 'chunked', makeing error see the determined values for it and how it used
+// todo   'Accept' => 'application/json',
+//        'Transfer-Encoding' => 'chunked',   makeing error see the determined values for it and how it used
 //        'Server' => 'Apache',
         'Connection' => 'keep-alive',
         'Date' => '',

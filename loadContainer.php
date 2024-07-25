@@ -1,12 +1,14 @@
 <?php
 
 use App\App;
+use App\Controller\ControllerCustomCategory;
+use App\Controller\ControllerDeviceToken;
+use App\Controller\ControllerPlan;
 use App\Middleware\Api;
 use App\Container;
 use App\Controller\ControllerBudget;
 use App\Controller\ControllerCategory;
 use App\Controller\ControllerInvoice;
-use App\Controller\ControllerPlan;
 use App\Controller\ControllerPreference;
 use App\Controller\ControllerUser;
 use App\Database;
@@ -15,6 +17,8 @@ use App\Middleware\Admin;
 use App\Middleware\Middleware;
 use App\Model\Budget;
 use App\Model\Category;
+use App\Model\CustomPlan;
+use App\Model\DeviceToken;
 use App\Model\Invoice;
 use App\Model\Model;
 use App\Model\Plan;
@@ -22,11 +26,7 @@ use App\Model\Preference;
 use App\Model\User;
 use App\Router;
 use Predis\Client;
-use Dotenv\Dotenv;
 
-// using below class to load the .env file that holds the sensitive data
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->load();
 
 $container = new Container();
 App::setContainer($container);
@@ -60,7 +60,6 @@ $container->set(Middleware::class,new Middleware);
 $container->set(RequestHandler::class,new RequestHandler);
 $container->set('Pdo',$container->get(Database::class)->getConnection());
 $container->set(Router::class,new Router);
-
 // models
 $container->set(Model::class,new Model);
 $container->set(User::class,new User);
@@ -68,7 +67,10 @@ $container->set(Invoice::class,new Invoice);
 $container->set(Category::class,new Category);
 $container->set(Preference::class,new Preference);
 $container->set(Plan::class,new Plan);
+$container->set(CustomPlan::class,new CustomPlan);
+$container->set(DeviceToken::class,new DeviceToken);
 $container->set(Budget::class,new Budget);
+
 
 // controllers
 $container->set(ControllerUser::class,new ControllerUser);
@@ -76,7 +78,8 @@ $container->set(ControllerInvoice::class,new ControllerInvoice);
 $container->set(ControllerCategory::class,new ControllerCategory);
 $container->set(ControllerBudget::class,new ControllerBudget);
 $container->set(ControllerPlan::class,new ControllerPlan);
+$container->set(ControllerCustomCategory::class,new ControllerCustomCategory);
+$container->set(ControllerDeviceToken::class,new ControllerDeviceToken);
 $container->set(ControllerPreference::class,new ControllerPreference);
-
 
 

@@ -6,6 +6,6 @@ use App\Http\RequestHandler;
 class User extends Model{
 
     protected $table = 'users';
-
+    protected array $hashColumns = ["password"];
 
 }

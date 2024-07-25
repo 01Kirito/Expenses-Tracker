@@ -4,8 +4,6 @@
     <option name="directories">
       <list>
         <option value="$PROJECT_DIR$/tests" />
-        <option value="$PROJECT_DIR$/vendor/rbdwllr/reallysimplejwt/tests/Unit" />
-        <option value="$PROJECT_DIR$/vendor/rbdwllr/reallysimplejwt/tests/Integration" />
       </list>
     </option>
   </component>

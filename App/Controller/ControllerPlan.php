@@ -8,36 +8,39 @@ use App\Model\Plan;
 class ControllerPlan extends Controller
 {
 
-    public static $Plan ;
+    public static $planModel ;
 
     public function __construct()
     {
-        static::$Plan = App::getInstance(Plan::class);
+        Parent::__construct();
+        static::$planModel = App::getInstance(Plan::class);
     }
 
     public function index(): void
     {
-        static::$Plan->read();
+       $result = static::$planModel->get();
+       $this->response($result);
     }
 
-    public function store(array $Data):void{
-        $pairs = $Data['body_json'];
-        static::$Plan->create($pairs) ;
+    public function store(array $data):void{
+        static::$planModel->create($data['body_json']) ;
     }
 
     public function show():void{
         $user = $this->getAuthenticatedUser();
-        static::$Plan->fetchOne(conditions: ["user_id" => $user['id']]);
-
+        $result = static::$planModel->get(condition: ["user_id =" => $user["id"]], fetchOneRow: true);
+        $this->response($result);
     }
 
-    public function update($Data):void{
+    public function update($data):void{
         $user = $this->getAuthenticatedUser();
-        static::$Plan->updateWithResponse($Data['body_json'],["user_id"=>$user['id']],false);
+        $result = static::$planModel->update(column:$data['body_json'],condition:["user_id"=>$user['id']],autoDateUpdate:false);
+        $this->response($result);
     }
 
-    public function delete(array $Data):void{
-        static::$Plan->delete($Data['url_parameters']);
+    public function delete(array $data):void{
+        $result = static::$planModel->delete($data['url_parameters']);
+        $this->response($result);
     }
 
 }

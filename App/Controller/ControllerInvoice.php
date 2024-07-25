@@ -5,65 +5,75 @@ use App\App;
 use App\Auth;
 use App\Http\RequestHandler;
 use App\Model\Category;
+use App\Model\CustomPlan;
 use App\Model\Invoice;
 use App\Model\Plan;
 
 class ControllerInvoice extends Controller {
 
-    public static $Invoice ;
+    public static $invoiceModel ;
 
     public function __construct()
     {
-        static::$Invoice = App::getInstance(Invoice::class);
+        Parent::__construct();
+        static::$invoiceModel = App::getInstance(Invoice::class);
     }
 
     public function index(): void{
         $user = $this->getAuthenticatedUser();
-        static::$Invoice->read(conditions: "WHERE user_id=".$user["id"]);
+        $result = static::$invoiceModel->get(condition: ["user_id"=>$user["id"]]);
+        $this->response($result);
     }
 
-    public function store(array $Data):void{
+    public function store(array $data):void{
         $user = $this->getAuthenticatedUser();
-        $categoryColumn = App::getInstance(Category::class)->searchForOneRow(selection: "name",conditions: ["category_id"=> $Data['body_json']['category_id']])['name'];
-        $categoryBudget = App::getInstance(Plan::class)->searchForOneRow(selection: "{$categoryColumn},{$categoryColumn}_balance",conditions: ["user_id"=>$user["id"]]);
+        $categoryColumn = App::getInstance(Category::class)->get(condition: ["category_id"=> $data['body_json']['category_id']], fetchOneRow: true);
+        $categoryName = $categoryColumn[0]["name"];
+        $categoryBudget = App::getInstance(Plan::class)->get(selection: [$categoryName,$categoryName."_used"],condition: ["user_id"=>$user["id"]],fetchOneRow: true);
+        $categoryPlan = $categoryBudget[0];
 
-            if ($user) {
-                if ($this->checkBudget($categoryBudget[$categoryColumn],$categoryBudget[$categoryColumn."_balance"],$Data['body_json']['amount'],$categoryColumn)){
-                $Data['body_json']['user_id'] = $user['id'];
-                static::$Invoice->create($Data['body_json']);
+        if ($categoryBudget["error"] !== false || $categoryColumn["error"] !== false){
+        $this->response(["error"=>true, "message"=>($categoryColumn["message"] ?? "").", ".($categoryBudget["message"] ?? "")],failedStatusCode: 500);
+        }else{
+                if ($this->checkBudget(planPrice:$categoryPlan[$categoryName],currentAmount:$categoryPlan[$categoryName."_used"],purchasePrice:$data['body_json']['amount'],categoryColumn:$categoryName)){
+                $data['body_json']['user_id'] = $user['id'];
+                $result =  static::$invoiceModel->create($data['body_json']);
+                $this->response($result);
                 }else{
-                    RequestHandler::sendResponse(404,[],["message"=>"Update plan limit so you can add invoice"]);
+                 $this->response(["error"=>false,"message"=>"Update ".$categoryName." plan limit so you can add invoice"]);
                 }
-            }else{
-                RequestHandler::sendResponse(400,[],['message'=>'User not authenticated']);
-            }
+        }
     }
 
-    public function show(array $Data):void{
+    public function show(array $data):void{
         $user    = $this->getAuthenticatedUser();
-        $invoice = static::$Invoice->searchForOneRow(conditions: $Data['url_parameters']);
-        if ($invoice['user_id'] === $user['id']){
-            RequestHandler::sendResponse(200,[],$invoice);
+        $invoice = static::$invoiceModel->get(condition: $data['url_parameters'],fetchOneRow: true);
+        if ( $invoice["error"] === true ) $this->response($invoice) ;
+        elseif ($invoice[0]["user_id"] === $user["id"]){
+            $this->response($invoice);
         }else{
             RequestHandler::sendResponse(404,[],["message"=>"Unauthorized"]);
         }
     }
 
-    public function update($Data):void{
+    public function update($data):void{
         $user = $this->getAuthenticatedUser();
-        $invoice = static::$Invoice->searchForOneRow(conditions: $Data['url_parameters']);
-        if ($invoice['user_id'] === $user['id']){
-            static::$Invoice->updateWithResponse($Data['body_json'],$Data['url_parameters'],false);
+        $invoice = static::$invoiceModel->get(condition: $data['url_parameters'],fetchOneRow: true);
+        if ($invoice[0]['user_id'] === $user['id']){
+           $result =  static::$invoiceModel->update($data['body_json'],$data['url_parameters'],autoDateUpdate:false);
+           $this->response($result);
         }else{
             RequestHandler::sendResponse(404,[],["message"=>"Unauthorized"]);
         }
     }
 
-    public function delete(array $Data):void{
+    public function delete(array $data):void{
         $user = $this->getAuthenticatedUser();
-        $invoice = static::$Invoice->searchForOneRow(conditions: $Data['url_parameters']);
-        if ($invoice['user_id'] === $user['id']){
-            static::$Invoice->delete($Data['url_parameters']);
+        $invoice = static::$invoiceModel->get(condition: $data['url_parameters'],fetchOneRow: true);
+        if ( $invoice["error"] === true ) $this->response($invoice);
+        elseif ($invoice[0]['user_id'] === $user["id"]){
+            $result = static::$invoiceModel->delete($data['url_parameters']);
+            $this->response($result);
         }else{
             RequestHandler::sendResponse(404,[],["message"=>"Unauthorized"]);
         }
@@ -75,7 +85,7 @@ class ControllerInvoice extends Controller {
      if ($amountAfterPurchase > $planPrice){
          return false;
      }else{
-         App::getInstance(Plan::class)->update([$categoryColumn."_balance" => $amountAfterPurchase],["user_id"=>$this->getAuthenticatedUser()["id"]]);
+         App::getInstance(Plan::class)->update([$categoryColumn."_used" => $amountAfterPurchase],["user_id"=>$this->getAuthenticatedUser()["id"]]);
          return true;
      }
     }
