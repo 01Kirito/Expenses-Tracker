@@ -32,7 +32,7 @@ class Controller
 
     protected function getCache($key){
         $data = static::$redis->get($key);
-        return json_decode($data,true);
+        return $data === null ? null : json_decode($data,true);
     }
 
 
