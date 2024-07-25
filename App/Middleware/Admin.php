@@ -11,13 +11,9 @@ class Admin extends Middleware
 
  public function validations($token): bool
  {
-     $isValidToken = $this->isValidToken($token);
-     $isAdmin = $this->isAdmin();
-   if ($isAdmin === true && $isValidToken === true ){
-       return true;
-   }else{
-       return false;
-   }
+    $isValidToken = $this->isValidToken($token);
+    if($isValidToken === false) return false ;
+    return $this->isAdmin();
  }
 
  private function isAdmin(): bool

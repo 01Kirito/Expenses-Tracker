@@ -36,6 +36,7 @@ class Controller
     }
 
 
+    // todo : check if the header has cache control and do action based on it
     protected function checkHeaderForCache(){
         $cacheControl =  getallheaders();
         if($cacheControl["Cache-Control"] != "no-cache"){
