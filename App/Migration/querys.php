@@ -22,7 +22,7 @@ $sqlUser = "CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    safe_delete BOOLEAN DEFAULT FALSE
+    soft_delete BOOLEAN DEFAULT FALSE
 )";
 $messageUser = "Users table created";
 
@@ -38,41 +38,45 @@ $messageCategories = "Categories table created";
 
 
 // Create invoice table
-$sqlInvoice = "CREATE TABLE invoice (
+$sqlInvoice = "CREATE TABLE invoices (
     invoice_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL references users(id),
-    category_id INT NOT NULL references categories(category_id),
+    user_id INT NOT NULL,
+    category_id INT NOT NULL,
     amount DECIMAL(10,2) NOT NULL,
     description VARCHAR(255),
     purchase_date DATE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ,
+    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE
 )";
 $messageInvoice = "Invoice table created";
 
 
 // Create budget table
-$sqlBudget = "CREATE TABLE budget (
-    user_id INT NOT NULL references users(id),
-    total DECIMAL(10,2) NOT NULL,
-    spent DECIMAL(10,2) NOT NULL,
-    salary DECIMAL(10,2) NOT NULL
+$sqlBudget = "CREATE TABLE budgets (
+    user_id INT NOT NULL,
+    total  DECIMAL(10,2) NOT NULL default 0.00,
+    spent  DECIMAL(10,2) NOT NULL default 0.00,
+    salary DECIMAL(10,2) NOT NULL default 0.00,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )";
 $messageBudget = "Budget table created";
 
 
 // Create preference table
-$sqlPreference = "CREATE TABLE preference (
-    user_id INT NOT NULL references users(id),
-    theme VARCHAR(50) NOT NULL
+$sqlPreference = "CREATE TABLE preferences (
+    user_id INT NOT NULL,
+    theme VARCHAR(50) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )";
 $messagePreference = "preference table created";
 
 
 // Create plans table
 $sqlPlans = "CREATE TABLE plans (
-    user_id INT NOT NULL references users(id)
+    user_id INT NOT NULL ,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )";
 $messagePlans = "plans table created";
 

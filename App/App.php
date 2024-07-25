@@ -4,7 +4,7 @@ class App {
 
     protected static $container ;
 
-    public static function setContainer($container){
+    public static function setContainer($container):void{
         static::$container = $container;
     }
 
@@ -16,5 +16,8 @@ class App {
         return static::$container->get($instanceName);
     }
 
+    public static function setInstance($instanceName,$instance):void{
+        static::$container->set($instanceName,$instance);
+    }
 
 }
