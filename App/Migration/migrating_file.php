@@ -1,9 +1,10 @@
 <?php
 
-require_once '../../vendor/autoload.php';
-require_once '../../bootstrap.php';
+require_once __DIR__.'/../../vendor/autoload.php';
+require_once __DIR__.'/../../bootstrap.php';
+
 // returns the query's we need from the 'querys.php' file, so we can run them by foreach loop easily
-$querys = require_once 'querys.php';
+$querys = require_once __DIR__.'/querys.php';
 
 
 try {
@@ -26,11 +27,3 @@ try {
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
-
-// load necessary files
-require_once '../../loadContainer.php';
-
-// feeding the tables
-require_once "Seeder/seed_user.php";
-require_once "Seeder/seed_category.php";
-//require_once 'Seeder/seed_invoice.php';

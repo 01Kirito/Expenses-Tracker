@@ -20,7 +20,6 @@ class Model {
         $stmt = static::$pdo->prepare($sql);
         try {
             $stmt->execute($query["Values"]);
-            $result["error"]= false ;
             $result["message"]= "Row in the table ".$this->table." created";
             return $result;
         }catch (\PDOException $e) {
@@ -43,7 +42,7 @@ class Model {
         try {
             empty($condition["conditions"]) ? $stmt->execute() : $stmt->execute($condition["values"]);
             $result = ($fetchOneRow === true ? $stmt->fetch($fetchType) : $stmt->fetchAll($fetchType));
-            return empty($result) ? ["error"=>false,"message"=>"The row didn't found in table ".$this->table] : ["error"=>false ,$result] ;
+            return empty($result) ? ["message"=>"The row didn't found in table ".$this->table] : $result ;
         }catch (\PDOException $e){
             return ["error"=> $e->getMessage() ,"message" => "error in reading the row in table ".$this->table ." failed."];
         }
@@ -59,7 +58,6 @@ class Model {
         try {
             $stmt = static::$pdo->prepare($sql);
             $stmt->execute($query["allParameters"]);
-            $result["error"]= false;
             $result["message"]= "Row in the table ".$this->table.($stmt->rowCount() > 0 ? "" : " doesn't")." updated";
             return $result;
         }catch (\PDOException $e){
@@ -75,7 +73,6 @@ class Model {
             $stmt = static::$pdo->prepare($sql);
             $stmt->execute($query["values"]);
             $rowDeleted = $stmt->rowCount();
-            $result["error"]= false;
             $result["message"]= $rowDeleted." Row deleted in table ".$this->table." successfully.";
             return $result;
         }catch (\PDOException $e){
@@ -91,7 +88,6 @@ class Model {
             $stmt = static::$pdo->prepare($sql);
             $stmt->execute($query["values"]);
             $rowDeleted = $stmt->rowCount();
-            $result["error"]= false;
             $result["message"]= $rowDeleted." Row deleted in table ".$this->table." successfully.";
             return $result;
         }catch (\PDOException $e){
@@ -104,7 +100,7 @@ class Model {
         $sql    = "ALTER TABLE ".$this->table." ADD COLUMN ".$columnName." ".$columnType.";";
         $stmt   = static::$pdo->prepare($sql);
         try {
-        $result["error"]= !($stmt->execute());
+        $stmt->execute();
         $result["message"]="The column ".$columnName." added to the table ".$this->table." successfully.";
         return $result ;
         }catch (\PDOException $e) {
@@ -113,6 +109,7 @@ class Model {
            return $result;
         }
     }
+
 
 
     function arrayToUpdateQuery(array $data):array{

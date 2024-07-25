@@ -45,7 +45,6 @@ $client = new Predis\Client([
     "read_write_timeout"=>$_ENV["REDIS_READ_WRITE_TIMEOUT"],
     "timeout"=>$_ENV["REDIS_TIMEOUT"]
 ]);
-
 $container->set(Client::class,$client);
 
 

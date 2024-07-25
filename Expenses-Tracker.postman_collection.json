@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "eb5d4903-40a9-4e2b-a687-b72a61995809",
+		"_postman_id": "94dc4e3f-db04-40bb-9ea5-f9b4bd343f7e",
 		"name": "Expenses Tracker",
 		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -111,7 +111,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"first_name\": \"Musab\",\n    \"last_name\": \"Ismael\",\n    \"email\": \"musabjaff@gmail.com\",\n    \"password\": \"musab123\"\n}",
+							"raw": "{\n\t\"first_name\": \"Musab\",\n    \"last_name\": \"Ismael\",\n    \"email\": \"musabjaf15@gmail.com\",\n    \"password\": \"musab123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -126,6 +126,73 @@
 							"path": [
 								"user",
 								"store"
+							],
+							"query": [
+								{
+									"key": "hhafd",
+									"value": "dadf",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Register User Device Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Device-Token",
+								"value": "{{device_token2}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "firefox v3",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "mobile ",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/store/deviceToken",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"store",
+								"deviceToken"
 							],
 							"query": [
 								{
@@ -167,7 +234,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"first_name\": \"Musab\",\n    \"last_name\": \"Esmael\"\n\n}",
+							"raw": "{\n\t\"first_name\": \"Marden\",\n    \"last_name\": \"Ismael\"\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -273,7 +340,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"musabjaff@gmail.com\",\r\n    \"password\":\"musab123\"\r\n}",
+							"raw": "{\r\n    \"email\":\"musabjaf15@gmail.com\",\r\n    \"password\":\"musab123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -311,30 +378,6 @@
 							"path": [
 								"user",
 								"dashboard"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Dashboard Cache",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/user/dashboard_cache",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"user",
-								"dashboard_cache"
 							]
 						}
 					},
@@ -413,7 +456,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/user/invoice/show?invoice_id=11",
+							"raw": "{{base_url}}/user/invoice/show?invoice_id=5001",
 							"host": [
 								"{{base_url}}"
 							],
@@ -425,7 +468,7 @@
 							"query": [
 								{
 									"key": "invoice_id",
-									"value": "11"
+									"value": "5001"
 								}
 							]
 						}
@@ -460,7 +503,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"category_id\": \"3\",\n    \"amount\": \"1.56\",\n    \"description\": \"house renting\",\n    \"purchase_date\": \"2024-10-23 11:00:00\"\n}",
+							"raw": "// {\n//     \"category_id\": \"2\",\n//     \"amount\": \"120.56\",\n//     \"description\": \"buy laptop\",\n//     \"purchase_date\": \"2024-10-23 11:00:00\"\n// }\n\n{\n    \"category_id\": \"8\",\n    \"amount\": \"10.56\",\n    \"description\": \"buy bag\",\n    \"purchase_date\": \"2024-10-23 11:00:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -517,7 +560,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"category_id\": \"2\"\n\n}",
+							"raw": "{\n\t// \"category_id\": \"2\"\n    // \"description\":\"house\"\n    \"amount\":\"120\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -525,7 +568,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/user/invoice/update?invoice_id=11",
+							"raw": "{{base_url}}/user/invoice/update?invoice_id=4",
 							"host": [
 								"{{base_url}}"
 							],
@@ -537,7 +580,7 @@
 							"query": [
 								{
 									"key": "invoice_id",
-									"value": "11"
+									"value": "4"
 								}
 							]
 						}
@@ -563,9 +606,15 @@
 					],
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{base_url}}/user/invoice/delete?id=65",
+							"raw": "{{base_url}}/user/invoice/delete?invoice_id=9",
 							"host": [
 								"{{base_url}}"
 							],
@@ -576,8 +625,8 @@
 							],
 							"query": [
 								{
-									"key": "id",
-									"value": "65"
+									"key": "invoice_id",
+									"value": "9"
 								}
 							]
 						},
@@ -648,7 +697,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/category/show?category_id=3",
+							"raw": "{{base_url}}/category/show?category_id=7",
 							"host": [
 								"{{base_url}}"
 							],
@@ -659,7 +708,7 @@
 							"query": [
 								{
 									"key": "category_id",
-									"value": "3"
+									"value": "7"
 								}
 							]
 						}
@@ -694,7 +743,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"name\":\"Travling\",\n\"description\":\"......\"\n}",
+							"raw": "// {\n// \"name\":\"Travling\",\n// \"description\":\"......\"\n// }\n\n{\n\"name\":\"ddfe\",\n\"description\":\"For Gaming purposes\"\n}\n\n// {\n// \"name\":\"Renting\",\n// \"description\":\"For renting purposes\"\n// }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -708,6 +757,62 @@
 							],
 							"path": [
 								"category",
+								"store"
+							],
+							"query": [
+								{
+									"key": "hhafd",
+									"value": "dadf",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Custom Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"name\":\"Travling\",\n\"description\":\"......\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customCategory/store",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customCategory",
 								"store"
 							],
 							"query": [
@@ -741,10 +846,16 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"name\":\"Education\",\n\"description\":\"for studing purpose\"\n}",
+							"raw": "{\n\"name\":\"Deer\",\n\"description\":\"for the purposes like traveling\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -752,7 +863,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/category/update?category_id=1",
+							"raw": "{{base_url}}/category/update?category_id=15",
 							"host": [
 								"{{base_url}}"
 							],
@@ -763,7 +874,7 @@
 							"query": [
 								{
 									"key": "category_id",
-									"value": "1"
+									"value": "15"
 								}
 							]
 						}
@@ -882,7 +993,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"Renting\": \"50\",\n    \"Health\": \"220\",\n     \"Education\":\"90\"\n}",
+							"raw": "{\n\t// \"Renting\": \"50\",\n    // \"Health\": \"220\",\n     \"Education\":\"190\",\n     \"Service\":100\n    // \"Traveling\":\"200\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -890,7 +1001,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/user/plan/update?user_id=8",
+							"raw": "{{base_url}}/user/plan/update",
 							"host": [
 								"{{base_url}}"
 							],
@@ -898,12 +1009,6 @@
 								"user",
 								"plan",
 								"update"
-							],
-							"query": [
-								{
-									"key": "user_id",
-									"value": "8"
-								}
 							]
 						}
 					},
@@ -914,6 +1019,44 @@
 		{
 			"name": "Budget Table",
 			"item": [
+				{
+					"name": "Get Budgets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/budget",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"budget"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Get Budget",
 					"event": [
@@ -932,24 +1075,34 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{base_url}}/user/budget?user_id=1",
+							"raw": "{{base_url}}/user/budget/show?name=total&name2=salary",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"user",
-								"budget"
+								"budget",
+								"show"
 							],
 							"query": [
 								{
-									"key": "user_id",
-									"value": "1"
+									"key": "name",
+									"value": "total"
+								},
+								{
+									"key": "name2",
+									"value": "salary"
 								}
 							]
-						},
-						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+						}
 					},
 					"response": []
 				},
@@ -974,14 +1127,14 @@
 						"method": "PUT",
 						"header": [
 							{
-								"key": "aut",
-								"value": "",
+								"key": "Authorization",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"total\": \"910\"\n}",
+							"raw": "{\n\t// \"total\": \"910\"\n    \"salary\":\"400\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1025,9 +1178,15 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{base_url}}/user/preference?user_id=1",
+							"raw": "{{base_url}}/user/preference?selection=theme",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1037,8 +1196,18 @@
 							],
 							"query": [
 								{
-									"key": "user_id",
-									"value": "1"
+									"key": "selection",
+									"value": "language",
+									"disabled": true
+								},
+								{
+									"key": "selection",
+									"value": "*",
+									"disabled": true
+								},
+								{
+									"key": "selection",
+									"value": "theme"
 								}
 							]
 						},
@@ -1065,10 +1234,16 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"theme\": \"light\"\n}",
+							"raw": "{\n\t// \"theme\": \"light\"\n    \"Language\":\"FR\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1076,7 +1251,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/user/preference/update?user_id=8",
+							"raw": "{{base_url}}/user/preference/update",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1084,12 +1259,54 @@
 								"user",
 								"preference",
 								"update"
-							],
-							"query": [
-								{
-									"key": "user_id",
-									"value": "8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adding Preference",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"childs\",\r\n    \"datatype\":\"VARCHAR(30) NOT NULL DEFAULT 'MUTE' \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/preference/store",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"preference",
+								"store"
 							]
 						}
 					},
@@ -1119,10 +1336,6 @@
 		}
 	],
 	"variable": [
-		{
-			"key": "id",
-			"value": "1"
-		},
 		{
 			"key": "base_url",
 			"value": ""

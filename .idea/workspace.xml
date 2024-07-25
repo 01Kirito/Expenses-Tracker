@@ -5,35 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13ebe071-4b8f-4ea9-a125-a5fdc7962d8d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/App/Migration/Seeder/seed_invoice.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Migration/custom.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web app/service-worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerBudget.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerBudget.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerCategory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerCustomCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerCustomCategory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerDeviceToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerDeviceToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerInvoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerInvoice.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerPlan.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerPlan.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerPreference.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerPreference.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controller/ControllerUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controller/ControllerUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Http/RequestHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Http/RequestHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Middleware/Middleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Middleware/Middleware.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Migration/Seeder/seed_category.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/Seeder/seed_category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Migration/Seeder/seed_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/Seeder/seed_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Migration/migrating_file(runThisFile).php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/migrating_file(runThisFile).php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Migration/querys.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Migration/querys.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Model/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Model/Model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Command/Commands.log" beforeDir="false" afterPath="$PROJECT_DIR$/Command/Commands.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Command/Schedule.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/Schedule.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Command/cronTab.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/cronTab.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Command/daily_notification.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/daily_notification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Command/monthly_report.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/monthly_report.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Command/redisCache.php" beforeDir="false" afterPath="$PROJECT_DIR$/Command/redisCache.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web app/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,16 +67,19 @@
     "PHP Script.ControllerUser.php.executor": "Run",
     "PHP Script.Model.php.executor": "Run",
     "PHP Script.Schema_design.php.executor": "Run",
+    "PHP Script.cronTab.php.executor": "Run",
     "PHP Script.custom.php.executor": "Run",
     "PHP Script.daily_notification.php.executor": "Run",
     "PHP Script.migrating_file(runThisFile).php.executor": "Run",
     "PHP Script.migrating_file.php.executor": "Run",
     "PHP Script.monthly_report.php.executor": "Run",
     "PHP Script.redisCache.php.executor": "Run",
+    "PHP Script.seed.php.executor": "Run",
     "PHP Script.seed_invoice.php.executor": "Run",
+    "PHP Script.test.php.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feature__fcm",
-    "last_opened_file_path": "C:/xampp/htdocs/ExpensesTracker/Web app",
+    "git-widget-placeholder": "feature__dockerize",
+    "last_opened_file_path": "C:/Users/musab.ismael/Desktop/Test/Expenses-Tracker",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -114,6 +89,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\ExpensesTracker" />
       <recent name="C:\xampp\htdocs\ExpensesTracker\Web app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -148,11 +124,18 @@
       <option name="presentableId" value="Default" />
       <updated>1721022497782</updated>
       <workItem from="1721022500329" duration="56605000" />
-      <workItem from="1721268118127" duration="64924000" />
+      <workItem from="1721268118127" duration="107780000" />
+      <workItem from="1721739751257" duration="26771000" />
+      <workItem from="1721833456389" duration="2750000" />
+      <workItem from="1721843872552" duration="44000" />
+      <workItem from="1721846298086" duration="2091000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>

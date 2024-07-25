@@ -7,7 +7,7 @@ use App\Auth;
 
 class Admin extends Middleware
 {
-    private static $adminsEmail = ["musabjaf12@gmail.com","musabjaf15@gmail.com","musabjaff@gmail.com"];
+    private static $adminsEmail = ["admin@gmail.com","musabjaf12@gmail.com","musabjaf15@gmail.com","musabjaff@gmail.com"];
 
  public function validations($token): bool
  {

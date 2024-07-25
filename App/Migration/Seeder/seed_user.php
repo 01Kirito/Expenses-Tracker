@@ -31,7 +31,8 @@ for ($i = 0; $i < $numUsers; $i++) {
     $updated_at = date('Y-m-d H:i:s');
     $soft_delete = 0; // Assuming soft_delete is an integer (0 for active, 1 for deleted)
     $data = ["first_name"=>$first_name,"last_name"=>$last_name,"email"=>$email,"password"=>$password,"created_at"=>$created_at,"updated_at"=>$updated_at,"soft_delete"=>$soft_delete];
-    $userModel->create($data);
+    $result = $userModel->create($data);
+    echo (array_key_exists("error",$result) ? $result["error"] : "");
 }
 
 

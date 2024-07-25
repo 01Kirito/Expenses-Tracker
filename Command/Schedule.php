@@ -26,9 +26,9 @@ class Schedule {
                                 if ($result === 0){
                                     $text = "Command: <<".$key.">> successfully run the file '".$command."' by '". $executeFile." at: ".date("Y-M-D H:i:s",time())." .(status result:".$result.")\n";
                                 }else{
-                                    $text = "Command: <<".$key.">> failed at running the file '".$command."' by '". $executeFile." at:".date("Y-M-D H:i:s",time())." .(status result:".$result.")\n";
+                                    $text = "Command: <<".$key.">> failed at running the file '".$command."' by '". $executeFile." at:".date("Y-M-D H:i:s",time())." .(status result:".$result.")\n".implode(",  ",$output)."\n";
                                 }
-                                file_put_contents("Commands.log", $text, FILE_APPEND | LOCK_EX);
+                                file_put_contents(__DIR__."/"."Commands.log", $text, FILE_APPEND | LOCK_EX);
                             }
                         }
                     }

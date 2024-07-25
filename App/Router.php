@@ -24,11 +24,9 @@ class Router
 
     public static function route($class, $function): void
     {
-
         $parameters = self::fetchBodyAndUrlParameters();
         $requestMethod  = new ReflectionMethod($class, $function);
         $parametersForMethod = $requestMethod->getNumberOfRequiredParameters();
-
         if ($parametersForMethod > 0 && $parameters !== false ) {
             call_user_func_array(array(App::getInstance($class), $function), array($parameters));
         }elseif($parametersForMethod > 0 && $parameters === false) {

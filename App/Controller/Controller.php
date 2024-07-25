@@ -31,7 +31,8 @@ class Controller
     }
 
     protected function getCache($key){
-        return json_decode(static::$redis->get($key),true);
+        $data = static::$redis->get($key);
+        return json_decode($data,true);
     }
 
 
@@ -49,7 +50,7 @@ class Controller
 
 
     protected function response(array $result,int $successStatusCode = 200 ,int $failedStatusCode = 400 ,array $headers = []):void{
-       if (!array_key_exists("error",$result) || $result["error"] === false){
+       if (!array_key_exists("error",$result)){
            unset($result["error"]);
            RequestHandler::sendResponse($successStatusCode, $headers, $result);
        }else{

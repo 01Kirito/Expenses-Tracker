@@ -1,0 +1,52 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    environment:
+        - DB_HOST=db
+        - DB_USER=root
+        - DB_PASS=Admin@123
+        - DB_NAME=expenses_tracker
+        - DB_CHAR=utf8mb4
+        - DB_PORT=3306
+        - REDIS_HOST=redis
+        - REDIS_PORT=6379
+        - REDIS_SCHEME=tcp
+
+    depends_on:
+      - db
+      - redis
+    command: ["/usr/local/bin/myStartupScript.sh"]
+    networks:
+      - mynetwork
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Admin@123  # Set your desired MySQL root password here
+      MYSQL_DATABASE: expenses_tracker
+    ports:
+      - "3306:3306"
+    networks:
+      - mynetwork
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - mynetwork
+
+
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  db_data:
