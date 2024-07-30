@@ -2,7 +2,7 @@
 ### 1-Go to the project folder by the command below
 cd Expenses-Tracker
 ### 2-Get firebase auth service JSON file to the private directory 
-you can follow the steps in this link to create the file with a project on Firebase (https://help.emarsys.com/hc/en-us/articles/360004905238-Android-integration-Mobile-Engage-Firebase-authentication-for-Push-messages#:~:text=4.-,Service%20Account%20JSON%20file,be%20downloaded%20to%20your%20computer.)
+you can follow the steps in this [link](https://help.emarsys.com/hc/en-us/articles/360004905238-Android-integration-Mobile-Engage-Firebase-authentication-for-Push-messages#:~:text=4.-,Service%20Account%20JSON%20file,be%20downloaded%20to%20your%20computer.) to create the file with a project on Firebase 
 ### 3-Rename .env.example file to .env by the below command 
 ren .env.example .env   
 ### 4-Then configure, cause you use docker you donot need to configure all of it you just need to put the file(auth service) name to the variable GOOGLE_APPLICATION_CREDENTIALS
