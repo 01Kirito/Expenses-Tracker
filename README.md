@@ -29,7 +29,9 @@ you can follow the steps in this [link](https://help.emarsys.com/hc/en-us/articl
 ### 1- vlucas/phpdotenv            //  for using the .env file
 ### 2- rbdwllr/reallysimplejwt     //  for auth and make jwt
 ### 3- predis/predis               //  for cache with redis
-<be>
+
+<br/>
+<br/>
 
 ## JWT Secret Key generating
 This JWT library [(reallysimplejwt)](https://github.com/RobDWaller/ReallySimpleJWT?tab=readme-ov-file#secret-strength) imposes strict secret security via the EncodeHS256Strong class. The secret provided must be at least 12 characters in length; contain numbers; upper and lowercase letters; and one of the following special characters *&!@%^#$.
