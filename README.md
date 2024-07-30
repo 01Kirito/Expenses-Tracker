@@ -11,7 +11,7 @@ ren .env.example .env
 docker-compose -p project up
 ### Now you can test endpoints by importing the environments and api collections from the postman and use it 
 
- <br />
+__
 ## Also if you want to access the containers we can use this command for database(mysql) and cache(redis)
 ### Opening the bash for the container we want to access
 docker exec -it db bash   or   docker exec -it db bash 
@@ -20,11 +20,12 @@ mysql -h db -u root -p
 ### And for the redis use this command below
 redis-cli -h redis -p 6379
 
- <br />
+__
 ## Packages I used for the project 
 ### 1- vlucas/phpdotenv            //  for using the .env file
 ### 2- rbdwllr/reallysimplejwt     //  for auth and make jwt
 ### 3- predis/predis               //  for cache with redis
- <br />
+
+__
 ## JWT Secret Key generating
 This JWT library [(reallysimplejwt)](https://github.com/RobDWaller/ReallySimpleJWT?tab=readme-ov-file#secret-strength) imposes strict secret security via the EncodeHS256Strong class. The secret provided must be at least 12 characters in length; contain numbers; upper and lowercase letters; and one of the following special characters *&!@%^#$.
